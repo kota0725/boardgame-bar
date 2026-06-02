@@ -1,0 +1,59 @@
+body{
+    margin: 0;
+    background: #121212;
+    color: #f5f5f5;
+  
+    font-family: 'Noto Sans JP', sans-serif;
+  }
+  
+  .thanks{
+    min-height: 100vh;
+  
+    display: flex;
+    flex-direction: column;
+  
+    justify-content: center;
+    align-items: center;
+  
+    text-align: center;
+  
+    padding: 20px;
+  }
+  
+  .thanks-sub{
+    color: #c47a2c;
+    letter-spacing: 3px;
+  
+    margin-bottom: 20px;
+  }
+  
+  .thanks h1{
+    font-size: 42px;
+    margin-bottom: 20px;
+  
+    font-family: 'Playfair Display', serif;
+  }
+  
+  .thanks-text{
+    color: #888888;
+    line-height: 1.8;
+  
+    margin-bottom: 40px;
+  }
+  
+  .thanks-btn{
+    background: #c47a2c;
+    color: #f5f5f5;
+  
+    text-decoration: none;
+  
+    padding: 16px 40px;
+  
+    border-radius: 999px;
+  
+    transition: 0.3s;
+  }
+  
+  .thanks-btn:hover{
+    opacity: 0.8;
+  }

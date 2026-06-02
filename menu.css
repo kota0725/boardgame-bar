@@ -1,0 +1,194 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+html{
+    scroll-behavior:smooth;
+}
+body{
+    background:#121212;
+    color:#f5f5f5;
+    font-family:'Noto Sans JP',sans-serif;
+    line-height:1.8;
+}
+
+/*====HERO======*/
+.menu-hero{
+    width:100%;
+    height:42vh;
+    min-height:320px;
+
+    background:linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.78)),url(../img/drink-background.png);
+
+    background-size:cover;
+    background-position:center;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:20px;
+}
+.hero-inner h1{
+    font-family:'Playfair Display',sans-serif;
+    font-size:2.8rem;
+    letter-spacing:4px;
+    margin-bottom:14px;
+}
+.hero-inner p{
+    font-family:'Zen Maru Gothic',sans-serif;
+    color:#d9d9d9;
+    font-size:0.95rem;
+}
+
+/*=====MAIN=====*/
+.menu-area{
+    width:100%;
+    max-width:900px;
+    margin:auto;
+    padding:60px 18px 80px;
+}
+
+/*=====RECOMMEND=====*/
+.recommend{
+    background:#1a1a1a;
+    border:1px solid rgba(196,122,44,0.35);
+    border-radius:20px;
+    padding:30px 20px;
+    margin-bottom:60px;
+    text-align:center;
+}
+.recommend h2{
+    font-family:'Playfair Display',sans-serif;
+    color:#d88a3d;
+    letter-spacing:3px;
+    font-size:1.8rem;
+    margin-bottom:20px;
+}
+.recommend p{
+    margin-bottom:10px;
+    font-size:1rem;
+}
+
+/*=====SECTION TITLE======*/
+.section-title{
+    text-align:center;
+    font-family:'Playfair Display',sans-serif;
+    font-size:2.2rem;
+    letter-spacing:4px;
+    color:#d88a3d;
+    margin-bottom:34px;
+}
+
+/*=====CATEGORY=======*/
+.menu-category{
+    background:#1a1a1a;
+    border-radius:18px;
+    padding:24px 18px;
+    margin-bottom:22px;
+    border:1px solid rgba(255,255,255,0.05)
+}
+.menu-category h3{
+    font-family:'Zen Maru Gothic',sans-serif;
+    color:#d88a3d;
+    font-size:1rem;
+    letter-spacing:2px;
+    margin-bottom:18px;
+    padding-left:10px;
+    border-left:3px solid #c47a2c;
+}
+
+/*======MENU ITEM=======*/
+.menu-item{
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+    gap:20px;
+    padding:13px 0;
+    border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.menu-item:last-child{
+    border-bottom;none;
+}
+.menu-name{
+    color:#f5f5f5;
+    font-size:0.96rem;
+}
+.price{
+    font-family:'Montserrat',sans-serif;
+    color:#d88a3d;
+    font-size:0.95rem;
+    white-space:nowrap;
+}
+summary{
+    display:flex;
+    align-items: center;
+
+    list-style:none;
+    cursor:pointer;
+    font-family:'Zen Maru Gothic',sans-serif;
+    color:#d88a3d;
+    padding:5px 0;
+    letter-spacing:2px;
+
+    gap:10px;
+    cursor:pointer;
+}
+summary::-webkit-details-marker{
+    display:none;
+}
+summary::after{
+    content:"▼";
+    margin-left:auto;
+    font-size:.9rem;
+    transition:.3s;
+}
+details[open] summary::after{
+    transform:rotate(180deg);
+}
+
+
+
+/*======TABLET======*/
+@media(min-width:768px){
+    .menu-hero{
+        height:50vh;
+    }
+    .hero-inner h1{
+        font-size:4.5rem;
+    }
+    .hero-inner p{
+        font-size:1.1rem;
+    }
+    .menu-area{
+        padding:90px 40px;
+    }
+    .menu-category{
+        padding:30px;
+    }
+    .menu-name{
+        font-size:1rem;
+    }
+    .price{
+        font-size:1rem;
+    }
+}
+
+
+/*=======PC======*/
+@media(min-width:1024px){
+    .menu-area{
+        padding:100px 50px;
+    }
+    .section-title{
+        font-size:2.5rem;
+    }
+    .menu-category{
+        transition:0.3s;
+    }
+    .menu-category:hover{
+        transform:translateY(-4px);
+        border:1px solid rgba(216,138,61,0.25);
+    }
+}

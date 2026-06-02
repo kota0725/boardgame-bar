@@ -1,0 +1,137 @@
+body {
+    margin: 0;
+    background: #121212;
+    color: #f5f5f5;
+    font-family: "Noto Sans JP", sans-serif;
+}
+
+/*  ヘッダー  */
+.system-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 20px;
+
+    position: fixed;
+    width: 100%;
+
+    background: rgba(18, 18, 18, 0.8);
+    backdrop-filter: blur(10px);
+    box-sizing: border-box;
+
+    z-index: 100;
+}
+
+.logo img {
+    height: 80px;
+    width: auto;
+    display: block;
+}
+
+.system-header nav a {
+    color: #c47a2c;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+/* メイン */
+.system-page {
+    padding-top: 50px;
+}
+
+/*　ヒーロー */
+.system-hero {
+    text-align: center;
+    padding: 100px 20px 70px;
+}
+
+.system-sub {
+    color: #c47a2c;
+    letter-spacing: 4px;
+    font-size: 0.8rem;
+    margin-bottom: 15px;
+    font-family: "Montserrat", sans-serif;
+}
+
+.system-hero h1 {
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    font-family: "Zen Maru Gothic", sans-serif;
+}
+
+.hero-text {
+    color: #d88a3d;
+    font-size: 1.2rem;
+}
+
+/* 説明文 */
+.system-description {
+    text-align: left;
+    padding:0 40px;
+    margin-bottom: 50px;
+}
+.system-description p{
+    line-height: 2.2;
+    color:#ccc;
+    margin-bottom: 20px;
+}
+/* カード */
+.price-section {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding: 0 20px 100px;
+}
+
+.price-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    padding: 40px 25px;
+}
+
+.price-card .active {
+    border: 1px solid #c47a2c;
+}
+
+.card-label {
+    color: #888888;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.price-card h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    font-family: "Zen Maru Gothic", sans-serif;
+}
+
+.price {
+    font-size: 3rem;
+    color: #d88a3d;
+    margin-bottom: 15px;
+    font-family: "Montserrat", sans-serif;
+}
+
+.price-sub {
+    color: #bbbbbb;
+    margin-bottom: 25px;
+}
+
+.price-card ul {
+    padding-left: 20px;
+    line-height: 2;
+    margin-bottom: 25px;
+}
+
+.note {
+    color: #888;
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+
+/*====   PC    =====*/
+@media screen and(min-width:768px) {}

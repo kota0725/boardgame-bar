@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food & Drink</title>
+    <meta name="description" content="気軽に入れて遊べる大人の溜まり場ボードゲームバー">
+
+    <!--ファビコン-->
+    <link rel="icon" type="image/png" href="image/ippaiitiyufavicon.png">
+
+    <!--リセットCSS-->
+    <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+
+    <!---Googleフォント変更-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Google Fonts -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=Noto+Serif+JP:wght@200;400;700&family=Montserrat:wght@400;600&display=swap"
+        rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!--オリジナルCSS-->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/CTA.css">
+
+
+</head>
+
+<body>
+    <section class="reserve-hero">
+        <div class="overlay"></div>
+        <div class="hero-content">
+            <p class="reserve-sub">RESERVE</p>
+
+            <h1>
+                ふらっと一杯、<br>
+                ついでに一ゲーム。
+            </h1>
+
+            <p class="hero-text">
+                ご予約・お問い合わせはこちらから。<br>
+                内容確認後、店舗よりご連絡いたします。
+            </p>
+        </div>
+    </section>
+
+    <section class="reserve-section">
+        <div class="reserve-card">
+            <h2>Reservation Form</h2>
+
+            <form action="https://formspree.io/f/xgoqgynn" method="POST">
+
+                <div class="form-group">
+                    <label>お名前</label>
+                    <input type="text" name="name" placeholder="山田　太郎" required>
+                </div>
+
+                <div class="form-group">
+                    <label>電話番号　または　メールアドレス</label>
+                    <input type="email" name="email" placeholder="メールアドレス" required>
+                </div>
+
+                <div class="form-group">
+                    <label>来店希望日</label>
+                    <input type="date" name="date" required>
+                </div>
+
+                <div class="form-group">
+                    <label>来店時間</label>
+                    <input type="time" name="time" required>
+                </div>
+
+                <div class="form-group">
+                    <label>人数</label>
+                    <select name="peple" required>
+                        <option>1名</option>
+                        <option>2名</option>
+                        <option>3名</option>
+                        <option>4名</option>
+                        <option>5名以上</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>備考欄</label>
+                    <textarea name="message" rows="5" placeholder="ご質問・貸切相談・遊びたいゲームなど"></textarea>
+                </div>
+
+                <div class="notice-box">
+                    <h3>ご予約について</h3>
+                    <ul>
+                        <li>混雑状況により、ご希望に沿えない場合がございます。</li>
+                        <li>未成年の方へのアルコール提供は行っておりません。</li>
+                        <li>当日の変更・キャンセルはお電話にてご連絡ください。</li>
+                    </ul>
+                </div>
+
+                <p class="welcome-text">
+                    初めての方もお気軽にどうぞ。
+                </p>
+
+                <input type="hidden" name="_redirect" value="value=
+
+                <button type="submit" class="submit-btn">
+                    予約内容を送信する
+                </button>
+            </form>
+        </div>
+    </section>
+</body>
