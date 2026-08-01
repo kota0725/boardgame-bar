@@ -5,10 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Food & Drink</title>
+    <link rel="icon" href="img/favicon.png" sizes="any">
     <meta name="description" content="気軽に入れて遊べる大人の溜まり場ボードゲームバー">
 
-    <!--ファビコン-->
-    <link rel="icon" type="image/png" href="image/ippaiitiyufavicon.png">
 
     <!--リセットCSS-->
     <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
@@ -43,9 +42,41 @@
 </head>
 
 <body>
+
+    <!--ヘッダー　-->
+    <header class="header" id="top">
+        <input type="checkbox" id="menu-toggle">
+        <label for="menu-toggle" class="menu-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+
+        <h1 class="logo">
+            <a href="#top"><img src="img/logo.png" alt="一杯一遊"></a>
+        </h1>
+        <a href="CTA.html" class="reserve-btn hide-btn">
+            ご予約はこちら
+        </a>
+
+
+        <nav class="mobile-menu">
+            <ul>
+
+                <li><a href="ippaiichiyuu.html">HOME</a></li>
+                <li><a href="news.html">NEWS</a></li>
+                <li><a href="contact.html">CONTACT & ACCESS</a></li>
+            </ul>
+        </nav>
+
+        <label for="menu-toggle" class="overlay"></label>
+    </header>
+
+
     <section class="menu-hero">
-        <div class="hero-inner">
-            <h1>Food & Drink</h1>
+        <div class="hero-title-area">
+            <p class="sub-title">Food & Drink</p>
+            <h2 class="main-title">メニュー表</h2>
         </div>
     </section>
 
@@ -425,4 +456,13 @@
             </details>
         </section>
     </main>
+
+
+    <footer>
+        <p class="copyright">
+            &copy;2026 ippaiichiyuu
+        </p>
+    </footer>
 </body>
+
+</html>

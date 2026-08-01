@@ -1,0 +1,486 @@
+/* ==========================================================================
+   共通リセット & ベーススタイル
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #0f0f0f;
+    color: #f5f5f5;
+    font-family: 'Noto Sans JP', sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 20px;
+    background-color: #0f0f0f;
+}
+
+
+/* ==========================================================================
+   メインレイアウト & 間隔調整
+   ========================================================================== */
+
+/* 「お知らせ一覧に戻る」のスタイル調整と紫色防止 */
+.back-to-news {
+    padding-top: 25px;
+    margin-bottom: 10px;
+}
+
+.back-link {
+    font-family: 'Noto Sans JP', sans-serif;
+    color: #888888 !important;
+    text-decoration: none;
+    font-size: 0.85rem;
+}
+
+.back-link:visited {
+    color: #888888;
+}
+
+.back-link:hover {
+    color: #c47a2c;
+}
+
+/* 導入セクション */
+.drink-arrival-section {
+    padding: 20px 0 10px 0;
+}
+
+.event-meta-date {
+    color: #c47a2c;
+    font-size: 0.9rem;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 12px;
+}
+
+/* メインタイトル */
+.event-main-title {
+    font-family: 'Zen Maru Gothic', sans-serif !important;
+    font-weight: 700;
+    font-size: 1.35rem;
+    line-height: 1.5;
+    margin-bottom: 25px;
+    color: #ffffff;
+}
+
+/* 導入文章の間隔 */
+.event-lead-text {
+    margin-bottom: 40px;
+    /* ボドゲリストが始まるまでのゆったりした余白 */
+}
+
+.event-lead-text p {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: #f5f5f5;
+    margin-bottom: 14px;
+}
+
+.event-lead-text p:last-child {
+    margin-bottom: 0;
+}
+
+/* ==========================================================================
+     ドリンク カードスタイル
+     ========================================================================== */
+
+/* 各ゲームのまとまりを囲うリスト */
+.drink-list {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    /* 💡 ドリンクカード同士の間隔をガッツリ空けてギチギチ感を解消 */
+}
+
+/* ドリンクカード本体（境界線をつけて独立した塊にする） */
+.drink-card {
+    border-bottom: 1px solid #222222;
+    /* カード同士の区切り線 */
+    padding-bottom: 10px;
+}
+
+.drink-card:last-child {
+    border-bottom: none;
+    /* 最後のカードの線は消す */
+}
+
+/* 特徴バッジ（黒背景×オレンジ枠に統一） */
+.drink-badge {
+    font-family: 'Zen Maru Gothic', sans-serif !important;
+    display: inline-block;
+    background-color: #0f0f0f;
+    color: #c47a2c;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+    /* バッジ下の余白 */
+    border: 1px solid #c47a2c;
+    letter-spacing: 0.02em;
+}
+
+/* ドリンクタイトル */
+.drink-title-ja {
+    font-family: 'Zen Maru Gothic', sans-serif !important;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.2;
+    margin-bottom: 4px;
+}
+
+.drink-title-en {
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 0.85rem;
+    color: #888888;
+    margin-bottom: 12px;
+    /* 画像までの余白 */
+    letter-spacing: 0.05em;
+}
+
+/* ドリンク画像（はみ出し・切り取り防止） */
+.drink-img-box {
+    width: 100%;
+    height: 400px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 15px;
+    background-color: #1a1a1a;
+    /* スペック表までの余白 */
+}
+
+.drink-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 45%;
+    display: block;
+}
+
+/* スペック情報（人数・時間・難易度） */
+.drink-spec-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 15px;
+    /* 説明文までの余白 */
+    padding-left: 2px;
+}
+
+.spec-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.spec-label {
+    color: #888888;
+    width: 110px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.spec-value {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+
+/* 数字フォント（Montserratを適用） */
+.num-font {
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+/* ドリンク説明文章ボックス */
+.drink-desc-box {
+    margin-bottom: 20px;
+}
+
+.drink-desc {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: #aaaaaa;
+    /* 少しだけ優しくして読みやすく */
+    margin-bottom: 12px;
+}
+
+.drink-desc:last-child {
+    margin-bottom: 0;
+}
+
+
+/* CTAセクション */
+.cta-btn {
+    display: inline-block;
+    margin-top: 32px;
+    background: #c47a2c;
+    color: #f5f5f5;
+    padding: 18px 48px;
+    font-family: 'Noto Sans JP', sans-serif;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.cta-btn:hover {
+    opacity: 0.8;
+}
+
+.cta {
+    width:100vw !important;
+    margin-left:calc(-50vw + 50%) !important; 
+    margin-right: calc(-50vw + 50%) !important;
+
+    margin-top:30px;
+    margin-bottom:0;
+
+    background-image: url(../img/CTA-background-mobile.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: auto !important;
+    padding-top: 40px !important;
+    padding-bottom:30px !important;
+    position: relative;
+
+    box-sizing: border-box;;
+}
+
+.cta::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.cta-inner {
+    width:100%;
+    padding:0 20px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: #f5f5f5;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+.cta-inner h2{
+    font-size:20px;
+    margin-bottom:6px;
+    color:#f5f5f5;
+}
+
+.cta-inner p{
+    font-size:14px;
+    margin-bottom: 18px;
+    color:#f5f5f5;
+}
+
+
+/* フッター */
+.copyright {
+    font-size: 12px;
+    color: #777;
+    letter-spacing: 0.08em;
+    text-align: center;
+    padding: 40px 0px 40px;
+}
+
+
+
+/* ==========================================================================
+   デスクトップ（PC）版のレスポンシブ対応 (画面横幅 768px 以上)
+   ========================================================================== */
+@media screen and (min-width: 768px) {
+
+    /* 全体を包む外箱 */
+    .container {
+        max-width: 1100px !important;
+        margin: 0 auto !important;
+        padding: 0 20px !important;
+    }
+
+    /* 「戻るリンク」の上の余白（固定ヘッダー対策） */
+    .back-to-news {
+        padding-top: 140px !important;
+        margin-bottom: 40px !important;
+    }
+
+    .event-meta-date {
+        font-size: 16px !important;
+        color: #c47a2c !important;
+        margin: 0 0 5px 0 !important;
+    }
+
+    .event-main-title {
+        font-size: 32px !important;
+        line-height: 1.4 !important;
+        padding-bottom: 35px !important;
+    }
+
+    .event-lead-text p {
+        font-size: 16px !important;
+        color: #f5f5f5 !important;
+
+    }
+
+
+
+    /*================
+==================ドリンク分野==============*/
+
+    /* 3枚のカードを横に並べる親要素 */
+    .drink-list {
+        display: flex !important;
+        flex-direction: row !important;
+        /* 横並びにする */
+        justify-content: space-between !important;
+        /* 3枚を均等に左右いっぱいに配置 */
+        gap: 70px !important;
+        /* カードとカードの間の横の隙間 */
+        align-items: flex-start !important;
+        /* カードの高さが違っても上端を揃える */
+        width: 100% !important;
+        margin-top: 40px !important;
+    }
+
+    .drink-img-box {
+        width: 100%;
+        aspect-ratio: 4 / 5;
+        overflow: hidden;
+        border-radius: 12px;
+    }
+
+    .drink-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        display: block;
+        border-radius: 12px;
+    }
+
+    .drink-card {
+        /* 💡【修正点3】梅酒（3枚目）も含め、すべてのカードの下に一連のグレーの線を引く */
+        border-bottom: 1px solid #333 !important;
+    }
+
+
+    /* 💡【修正点2】文字を大きく・読みやすく調整 */
+
+    /* ドリンク名（日本語） */
+    .drink-title-ja {
+        font-size: 24px !important;
+        /* 👈 パッと目に入る大きさに拡大 */
+        margin-top: 15px !important;
+        margin-bottom: 4px !important;
+    }
+
+    /* ドリンク名（英語） */
+    .drink-title-en {
+        font-size: 14px !important;
+        margin-bottom: 20px !important;
+    }
+
+    /* 💡【修正点2】スペックリスト全体の横幅を確保 */
+    .drink-spec-list {
+        width: 100% !important;
+        margin-bottom: 20px !important;
+    }
+
+    /* 💡【修正点2】「アルコール度数」を絶対に1行で表示する魔法の指示 */
+    .spec-item {
+        display: flex !important;
+        justify-content: space-between !important;
+        /* 「ベース」と「ウォッカ」を左右の端にわける */
+        align-items: center !important;
+        white-space: nowrap !important;
+        /* 👈 どんなに横幅が狭くても絶対に改行させない */
+        gap: 4px !important;
+        /* 文字同士の最低限の隙間 */
+        margin-bottom: 8px !important;
+    }
+
+    /* 3枚並びでも文字がはみ出したり潰れたりしない絶妙なサイズ */
+    .spec-label,
+    .spec-value {
+        font-size: 14px !important;
+        /* 👈 1行にスッキリ収まるベストサイズ */
+    }
+
+    /* ドリンクの説明文（本文） */
+    .drink-desc {
+        font-size: 15px !important;
+        /* 👈 読みやすい大きさに拡大 */
+        line-height: 1.7 !important;
+        /* 👈 行間を広げてすっきり見せる */
+        color: #f5f5f5 !important;
+        margin-bottom: 10px !important;
+    }
+
+    /* -------------------------
+       CTA
+       1. 横いっぱいに広げる
+       2. 背景画像をデスクトップ版に変更
+       ------------------------- */
+    .cta {
+        width: 100vw !important;
+        max-width: none !important;
+        margin-left: calc(-50vw + 50%) !important;
+        margin-right: calc(-50vw + 50%) !important;
+        margin-top: 50px;
+        padding: 120px 20px 180px 20px !important;
+
+        background-image:
+            linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),
+            url(../img/CTA-desktop.png) !important;
+        background-size: cover !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+    }
+
+    .cta-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .cta h2 {
+        font-size: 36px;
+        line-height: 1.4;
+        margin-bottom: 12px;
+    }
+
+    .cta p {
+        font-size: 18px;
+        margin-bottom: 32px;
+    }
+
+    .cta-btn {
+        display: inline-block;
+        padding: 10px 56px;
+        border-radius: 999px;
+        font-size: 16px;
+    }
+
+    .copyright {
+        grid-column: 1 / -1;
+        text-align: center;
+        margin-top: 50px;
+        padding-top: 24px;
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
+}

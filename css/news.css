@@ -1,0 +1,641 @@
+/* ==========================================================================
+   ヘッダー基本レイアウト (スマホ版・モバイルファースト)
+   ========================================================================== */
+.header {
+    display: flex;
+    justify-content: space-between;
+    /* これで「左・中央・右」に3分割されます */
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #121212;
+    /* 背景色（お店の雰囲気に合わせて調整してください） */
+    position: relative;
+    z-index: 100;
+}
+
+/* チェックボックス本体は画面から完全に隠す */
+#menu-toggle {
+    display: none;
+}
+
+/* --- 左側：ハンバーガーボタン --- */
+.menu-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    cursor: pointer;
+    z-index: 110;
+    /* メニューが開いた時も、その上に表示させるため */
+}
+
+/* 三本線の線のスタイル */
+.menu-btn span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: #fff;
+    /* 線の色（白） */
+    transition: all 0.3s ease;
+    /* アニメーションを滑らかに */
+}
+
+/* --- 中央：ロゴ --- */
+.logo {
+    max-width: 120px;
+    /* スマホ画面で大きくなりすぎないようにサイズを制限 */
+    margin: 0;
+    margin-left: 50px;
+}
+
+.logo a {
+    display: block;
+}
+
+.logo img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* --- 右側：CTAボタン（ご予約はこちら） --- */
+.reserve-btn {
+    background-color: #d18d43;
+    /* ロゴやお店に合わせたオレンジ・ゴールド系 */
+    color: #fff;
+    text-decoration: none;
+    font-size: 11px;
+    padding: 8px 12px;
+    border-radius: 20px;
+    /* 角を丸くしてボタンらしく */
+    font-weight: bold;
+    white-space: nowrap;
+    /* 文字が途中で改行されるのを防ぐ */
+}
+
+
+/* ==========================================================================
+     スマホ用メニューの開閉アニメーション（スライドイン）
+     ========================================================================== */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    /* 最初は画面の左外に隠しておく */
+    width: 70%;
+    /* メニューの横幅（画面の7割の大きさ） */
+    height: 100vh;
+    background-color: #111;
+    /* メニュー内の背景色（濃いグレー） */
+    padding-top: 80px;
+    /* ヘッダーのボタン類と被らないように上に余白を作る */
+    transition: all 0.3s ease;
+    z-index: 105;
+}
+
+.mobile-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mobile-menu ul li a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    padding: 15px 25px;
+    font-size: 16px;
+    border-bottom: 1px solid #222;
+    /* メニュー項目ごとの区切り線 */
+}
+
+/* --- 背景のオーバーレイ（メニューが開いた時の暗幕） --- */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    /* 画面を60%暗くする */
+    z-index: 102;
+}
+
+
+/* ==========================================================================
+     【CSSトリック】チェックボックスがON（開いた時）のスタイルチェンジ
+     ========================================================================== */
+
+/* 1. メニューを画面内（左端）にスライドさせて表示 */
+#menu-toggle:checked~.mobile-menu {
+    left: 0;
+}
+
+/* 2. 背景の暗幕を表示 */
+#menu-toggle:checked~.overlay {
+    display: block;
+}
+
+/* 3. ハンバーガーボタンの三本線を「×」に変形させる */
+#menu-toggle:checked~.menu-btn span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+
+#menu-toggle:checked~.menu-btn span:nth-child(2) {
+    opacity: 0;
+    /* 真ん中の線を消す */
+}
+
+#menu-toggle:checked~.menu-btn span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+
+
+
+
+
+
+/* ======================
+NEWS PAGE
+====================== */
+
+/* 全体のリセットと共通設定 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 💡 body全体を一杯一遊のベースカラー（#0f0f0f）にして白背景を直します */
+body {
+    background-color: #0f0f0f;
+    color: #f5f5f5;
+    /* テキストカラー */
+    font-family: 'Noto Sans JP', sans-serif;
+    /* 基本の本文フォント */
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* スマホ表示用のセンターコンテナ（ここがギュッと横幅を縮める役割をします） */
+.container {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 20px;
+    /* 💡 これで左右に綺麗な余白が生まれます */
+    background-color: #0f0f0f;
+}
+
+
+/* 各セクションの共通見出し */
+.news-section {
+    padding: 40px 0 0 0;
+}
+
+
+.instagram-section {
+    padding: 40px 0 20px 0;
+}
+
+.section-sub-title {
+    color: #c47a2c;
+    /* メインカラー */
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 5px;
+    font-family: 'Playfair Display', serif;
+    /* 英語ロゴ用フォント */
+    letter-spacing: 0.05em;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 28px;
+    ;
+    margin-bottom: 12px;
+    letter-spacing: 0.1em;
+    font-family: 'Zen Maru Gothic', sans-serif;
+    /* 見出しフォント */
+    font-weight: 700;
+}
+
+.section-title-en {
+    text-align: center;
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+    font-family: 'Playfair Display', sans-serif;
+    font-weight: 700;
+}
+
+.section-desc {
+    text-align: center;
+    color: #888888;
+    /* サブカラー */
+    font-size: 0.85rem;
+    margin-bottom: 30px;
+}
+
+/* ニュースリスト */
+.news-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 0 0 20px 0;
+}
+
+.news-item {
+    background-color: #121212;
+    /* サブの暗い背景 */
+    border: 1px solid #262626;
+    /* うっすら見える枠線 */
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.news-item:hover {
+    background-color: #1c1c1c;
+}
+
+.news-text {
+    flex: 1;
+    padding-right: 15px;
+}
+
+.news-date {
+    color: #c47a2c;
+    /* メインカラー */
+    font-size: 0.8rem;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.news-item-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #f5f5f5;
+    font-family: 'Zen Maru Gothic', sans-serif;
+    /* 見出しフォント */
+}
+
+.news-item-desc {
+    color: #888888;
+    /* サブカラー */
+    font-size: 0.8rem;
+    line-height: 1.5;
+}
+
+.news-arrow {
+    color: #c47a2c;
+    /* メインカラー */
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.news-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+/* Instagram公式埋め込みの調整 */
+.insta-mono-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.insta-mono-container iframe {
+    width: 100% !important;
+    min-width: auto !important;
+    max-width: 100% !important;
+    border-radius: 12px !important;
+}
+
+
+/* CTAセクション */
+.cta-btn {
+    display: inline-block;
+    margin-top: 32px;
+    background: #c47a2c;
+    color: #f5f5f5;
+    padding: 18px 48px;
+    font-family: 'Noto Sans JP', sans-serif;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.cta-btn:hover {
+    opacity: 0.8;
+}
+
+.cta {
+    width:100vw !important;
+    margin-left:calc(-50vw + 50%) !important; 
+    margin-right: calc(-50vw + 50%) !important;
+
+    margin-top:30px;
+    margin-bottom:0;
+
+    background-image: url(../img/CTA-background-mobile.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: auto !important;
+    padding-top: 40px !important;
+    padding-bottom:30px !important;
+    position: relative;
+
+    box-sizing: border-box;;
+}
+
+.cta::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.cta-inner {
+    width:100%;
+    padding:0 20px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: #f5f5f5;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+.cta-inner h2{
+    font-size:20px;
+    margin-bottom:6px;
+    color:#f5f5f5;
+}
+
+.cta-inner p{
+    font-size:14px;
+    margin-bottom: 18px;
+    color:#f5f5f5;
+}
+/* フッター */
+.copyright {
+    font-size: 12px;
+    color: #777;
+    letter-spacing: 0.08em;
+    text-align: center;
+    padding: 40px 0px 40px;
+}
+
+/* ==========================================================================
+   デスクトップ（PC）版のレスポンシブ対応 (画面横幅 768px 以上)
+   ========================================================================== */
+@media screen and (min-width: 768px) {
+
+
+    /* --- 0. 全体の共通設定 --- */
+    section {
+        max-width: 1200px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        padding: 80px 40px !important;
+    }
+
+
+    /* --- 1. ヘッダーの調整 (左:ロゴ / 中:メニュー / 右:CTA) --- */
+    header.header {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 10px 40px !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        z-index: 100 !important;
+        background: transparent !important;
+    }
+
+    #menu-toggle,
+    .menu-btn,
+    .overlay {
+        display: none !important;
+    }
+
+    .logo {
+        margin: 0 !important;
+        order: 1 !important;
+    }
+
+    .logo img {
+        width: 220px !important;
+        height: auto !important;
+        display: block !important;
+    }
+
+    .mobile-menu {
+        display: block !important;
+        position: static !important;
+        width: auto !important;
+        height: auto !important;
+        background: transparent !important;
+        margin-left: auto !important;
+        margin-right: 40px !important;
+        order: 2 !important;
+    }
+
+    .mobile-menu ul {
+        display: flex !important;
+        gap: 40px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        list-style: none !important;
+    }
+
+    .mobile-menu a {
+        font-size: 16px !important;
+        font-weight: bold !important;
+        letter-spacing: 0.1em !important;
+        color: #fff !important;
+        text-decoration: none !important;
+    }
+
+    .reserve-btn {
+        position: static !important;
+        order: 3 !important;
+        margin: 0 !important;
+        padding: 12px 24px !important;
+        font-size: 14px !important;
+        white-space: nowrap !important
+    }
+
+
+
+    /*============　　　　NEWS部分　　　　=====================*/
+
+
+    /* 1. 外箱 .container の幅制限を広げて中央に寄せる */
+    .container {
+        max-width: 1200px !important;
+        /* 横並びがゆったり収まる広い幅を確保 */
+        margin: 0 auto !important;
+        /* 全体を画面の真ん中に寄せる */
+        padding: 0 20px !important;
+    }
+
+    /* 2. タイトル部分のサイズと位置を、他のメインビジュアル（CTA）と完全に統一 */
+    .news-section {
+        height: 400px !important;
+        /* 他ページの画像CTAエリアと同じ高さ */
+        box-sizing: border-box;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        /* 上下の中央に文字を配置 */
+        align-items: center !important;
+        /* 左右の中央に文字を配置 */
+        text-align: center !important;
+        width: 100% !important;
+        padding-top: 160px !important;
+        /* 固定ヘッダーの下に綺麗に落とす余白 */
+        margin-bottom: 0 !important;
+    }
+
+    /* 英語の小タイトル（News）のサイズ調整 */
+    .news-section .section-sub-title {
+        font-size: 16px !important;
+        /* 他のサブタイトルとサイズを統一 */
+        letter-spacing: 0.1em !important;
+        margin-bottom: 10px !important;
+        text-transform: uppercase;
+    }
+
+    /* メインタイトル（お知らせ）の文字サイズを他ページの「RESERVE」等と統一 */
+    .news-section .section-title {
+        font-size: 36px !important;
+        /* CTAと同じ大きめのサイズに設定 */
+        font-weight: bold !important;
+        letter-spacing: 0.05em !important;
+        margin-bottom: 15px !important;
+    }
+
+    /* 説明文（最新情報や〜）の文字サイズ調整 */
+    .news-section .section-desc {
+        font-size: 14px !important;
+        line-height: 1.6 !important;
+        margin-bottom: -10px !important;
+    }
+
+    /* 3. 親箱を横並び（Flexbox）にし、位置をさらに「下にずらす」 */
+    .news-content-wrapper {
+        display: flex !important;
+        justify-content: space-between !important;
+        /* 左と右に綺麗に振り分け */
+        align-items: flex-start !important;
+        /* 上のラインで高さを揃える */
+        gap: 50px !important;
+        /* 記事とインスタの間のすき間 */
+        width: 100% !important;
+        /* 💡高すぎに感じた記事とインスタの塊を、タイトル（CTA）から80px下にずらします */
+        margin-top: 80px !important;
+        margin-bottom: 100px !important;
+    }
+
+    /* 左側：お知らせ記事一覧（.news-list）のPC幅 */
+    .news-list {
+        flex: 1 !important;
+        max-width: 62% !important;
+        /* 画面の約6割を贅沢に使う */
+        margin: 0 !important;
+    }
+
+    /* 各記事のリンク（aタグ）が縦に綺麗に積み重なるように保証 */
+    .news-link {
+        display: block !important;
+        width: 100% !important;
+        text-decoration: none;
+    }
+
+    /* 右側：Instagram（.instagram-section）のPC幅 ＆ 位置上げ調整 */
+    .instagram-section {
+        width: 34% !important;
+        margin: 0 !important;
+        position: sticky !important;
+        top: 140px;
+        /* スクロール時に固定ヘッダーの下で止まる位置 */
+
+        /* 💡【追加】ネガティブマージンを使って、インスタの箱だけを上に引き上げます */
+        margin-top: -50px !important;
+    }
+
+    /* インスタ内の公式ブロックが横にはみ出さないように枠内に100%固定 */
+    .insta-mono-container blockquote {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 100% !important;
+        margin: 0 auto !important;
+    }
+
+
+    /* -------------------------
+       CTA
+       1. 横いっぱいに広げる
+       2. 背景画像をデスクトップ版に変更
+       ------------------------- */
+    .cta {
+        width: 100vw !important;
+        max-width: none !important;
+        margin-left: calc(-50vw + 50%) !important;
+        margin-right: calc(-50vw + 50%) !important;
+        padding: 120px 20px 180px 20px !important;
+
+        background-image:
+            linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),
+            url(../img/CTA-desktop.png) !important;
+        background-size: cover !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+    }
+
+    .cta-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .cta h2 {
+        font-size: 36px;
+        line-height: 1.4;
+        margin-bottom: 12px;
+    }
+
+    .cta p {
+        font-size: 18px;
+        margin-bottom: 32px;
+    }
+
+    .cta-btn {
+        display: inline-block;
+        padding: 10px 56px;
+        border-radius: 999px;
+        font-size: 16px;
+    }
+
+    .copyright {
+        grid-column: 1 / -1;
+        text-align: center;
+        margin-top: 50px;
+        padding-top: 24px;
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
+}

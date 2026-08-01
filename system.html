@@ -4,11 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>システム案内</title>
+    <title>システム案内 | 一杯一遊</title>
+    <link rel="icon" href="img/favicon.png" sizes="any">
     <meta name="description" content="気軽に入れて遊べる大人の溜まり場ボードゲームバー">
 
-    <!--ファビコン-->
-    <link rel="icon" type="image/png" href="image/ippaiitiyufavicon.png">
 
     <!--リセットCSS-->
     <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
@@ -36,7 +35,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!--オリジナルCSS-->
-    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/system.css">
 
 
@@ -44,15 +42,34 @@
 
 <body>
     <!--ヘッダー　-->
-    <header class="system-header">
-        <a href="ippaiitiyu.html" class="logo">
-            <img src="img/ippaiitiyu.png" alt="一杯一遊ロゴ">
+    <header class="header" id="top">
+        <input type="checkbox" id="menu-toggle">
+        <label for="menu-toggle" class="menu-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+
+        <h1 class="logo">
+            <a href="#top"><img src="img/logo.png" alt="一杯一遊"></a>
+        </h1>
+        <a href="CTA.html" class="reserve-btn hide-btn">
+            ご予約はこちら
         </a>
 
-        <nav>
-            <a href="ippaiitiyu.html">HOME</a>
+
+        <nav class="mobile-menu">
+            <ul>
+
+                <li><a href="ippaiichiyuu.html">HOME</a></li>
+                <li><a href="news.html">NEWS</a></li>
+                <li><a href="contact.html">CONTACT & ACCESS</a></li>
+            </ul>
         </nav>
+
+        <label for="menu-toggle" class="overlay"></label>
     </header>
+
 
     <!--メイン-->
     <main class="system-page">
@@ -66,22 +83,27 @@
 
         <!--説明文章-->
         <section class="system-description">
-            <p>
-                お酒のお供に、ボードゲームなんて<br>
-                どうでしょうか。</p>
-            <p>
-                もちろん「お酒だけ」でも<br class="sp-only">
-                「ボードゲームだけ」でも大歓迎です。
-            </p>
-            <p>
-                ２軒目に困った夜や<br class="sp-only">
-                ちょっと誰かと遊びたい時にも。
-            </p>
-            <p>
-                ボドゲ初心者の方でも気軽に楽しめる、<br>
-                "大人の溜まり場"のような空間を<br>
-                ご用意しています。
-            </p>
+            <div class="description-text">
+                <p>
+                    お酒のお供に、ボードゲームなんて<br>
+                    どうでしょうか。</p>
+                <p>
+                    もちろん「お酒だけ」でも<br class="sp-only">
+                    「ボードゲームだけ」でも大歓迎です。
+                </p>
+                <p>
+                    ２軒目に困った夜や<br class="sp-only">
+                    ちょっと誰かと遊びたい時にも。
+                </p>
+                <p>
+                    ボドゲ初心者の方でも気軽に楽しめる、<br>
+                    "大人の溜まり場"のような空間を<br>
+                    ご用意しています。
+                </p>
+            </div>
+            <div class="pc-only">
+                <img src="img/zenntai1.png" alt="店内写真">
+            </div>
         </section>
 
         <!--料金-->
@@ -132,6 +154,11 @@
             </div>
         </section>
     </main>
+    <footer>
+        <p class="copyright">
+            &copy;2026 ippaiichiyuu
+        </p>
+    </footer>
 </body>
 
 </html>

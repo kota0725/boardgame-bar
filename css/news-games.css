@@ -1,0 +1,409 @@
+/* ==========================================================================
+   共通リセット & ベーススタイル
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #0f0f0f;
+    color: #f5f5f5;
+    font-family: 'Noto Sans JP', sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 20px;
+    background-color: #0f0f0f;
+}
+
+
+/* ==========================================================================
+   メインレイアウト & 間隔調整
+   ========================================================================== */
+
+/* 「お知らせ一覧に戻る」のスタイル調整と紫色防止 */
+.back-to-news {
+    padding-top: 25px;
+    margin-bottom: 10px;
+}
+
+.back-link {
+    font-family: 'Noto Sans JP', sans-serif;
+    color: #888888 !important;
+    text-decoration: none;
+    font-size: 0.85rem;
+}
+
+.back-link:visited {
+    color: #888888;
+}
+
+.back-link:hover {
+    color: #c47a2c;
+}
+
+/* 導入セクション */
+.game-arrival-section {
+    padding: 20px 0 10px 0;
+}
+
+.event-meta-date {
+    color: #c47a2c;
+    font-size: 0.9rem;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 12px;
+}
+
+/* メインタイトル */
+.event-main-title {
+    font-family: 'Zen Maru Gothic', sans-serif !important;
+    font-weight: 700;
+    font-size: 1.35rem;
+    line-height: 1.5;
+    margin-bottom: 25px;
+    color: #ffffff;
+}
+
+/* 導入文章の間隔 */
+.event-lead-text {
+    margin-bottom: 40px;
+    /* ボドゲリストが始まるまでのゆったりした余白 */
+}
+
+.event-lead-text p {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: #f5f5f5;
+    margin-bottom: 14px;
+}
+
+.event-lead-text p:last-child {
+    margin-bottom: 0;
+}
+
+/* ==========================================================================
+     ボードゲーム カードスタイル
+     ========================================================================== */
+
+/* 各ゲームのまとまりを囲うリスト */
+.game-list {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    /* 💡 ゲームカード同士の間隔をガッツリ空けてギチギチ感を解消 */
+}
+
+/* ゲームカード本体（境界線をつけて独立した塊にする） */
+.game-card {
+    border-bottom: 1px solid #222222;
+    /* カード同士の区切り線 */
+    padding-bottom: 10px;
+}
+
+.game-card:last-child {
+    border-bottom: none;
+    /* 最後のカードの線は消す */
+}
+
+/* 特徴バッジ（黒背景×オレンジ枠に統一） */
+.game-badge {
+    font-family: 'Zen Maru Gothic', sans-serif !important;
+    display: inline-block;
+    background-color: #0f0f0f;
+    color: #c47a2c;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+    /* バッジ下の余白 */
+    border: 1px solid #c47a2c;
+    letter-spacing: 0.02em;
+}
+
+/* ゲームタイトル */
+.game-title-ja {
+    font-family: 'Zen Maru Gothic', sans-serif !important;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.2;
+    margin-bottom: 4px;
+}
+
+.game-title-en {
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 0.85rem;
+    color: #888888;
+    margin-bottom: 20px;
+    /* 画像までの余白 */
+    letter-spacing: 0.05em;
+}
+
+/* ボードゲーム画像（はみ出し・切り取り防止） */
+.game-img-box {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 25px;
+    /* スペック表までの余白 */
+}
+
+.game-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* スペック情報（人数・時間・難易度） */
+.game-spec-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 25px;
+    /* 説明文までの余白 */
+    padding-left: 2px;
+}
+
+.spec-item {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+}
+
+.spec-label {
+    color: #888888;
+    width: 90px;
+    /* 縦のラインが綺麗に揃うように固定幅を確保 */
+    font-size: 0.85rem;
+}
+
+.spec-value {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+/* 数字フォント（Montserratを適用） */
+.num-font {
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+/* ゲーム説明文章ボックス */
+.game-desc-box {
+    margin-bottom: 20px;
+}
+
+.game-desc {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: #aaaaaa;
+    /* 少しだけ優しくして読みやすく */
+    margin-bottom: 12px;
+}
+
+.game-desc:last-child {
+    margin-bottom: 0;
+}
+
+/* CTAセクション */
+.cta-btn {
+    display: inline-block;
+    margin-top: 32px;
+    background: #c47a2c;
+    color: #f5f5f5;
+    padding: 18px 48px;
+    font-family: 'Noto Sans JP', sans-serif;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.cta-btn:hover {
+    opacity: 0.8;
+}
+
+.cta {
+    width: 100vw !important;
+    margin-left: calc(-50vw + 50%) !important;
+    margin-right: calc(-50vw + 50%) !important;
+
+    margin-top: 30px;
+    margin-bottom: 0;
+
+    background-image: url(../img/CTA-background-mobile.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: auto !important;
+    padding-top: 40px !important;
+    padding-bottom: 30px !important;
+    position: relative;
+
+    box-sizing: border-box;
+    ;
+}
+
+.cta::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.cta-inner {
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: #f5f5f5;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+.cta-inner h2 {
+    font-size: 20px;
+    margin-bottom: 6px;
+    color: #f5f5f5;
+}
+
+.cta-inner p {
+    font-size: 14px;
+    margin-bottom: 18px;
+    color: #f5f5f5;
+}
+
+
+
+/* フッター */
+.copyright {
+    font-size: 12px;
+    color: #777;
+    letter-spacing: 0.08em;
+    text-align: center;
+    padding: 40px 0px 40px;
+}
+
+
+
+/* ==========================================================================
+   デスクトップ（PC）版のレスポンシブ対応 (画面横幅 768px 以上)
+   ========================================================================== */
+@media screen and (min-width: 768px) {
+
+    /* 全体を包む外箱 */
+    .container {
+        max-width: 1100px !important;
+        margin: 0 auto !important;
+        padding: 0 20px !important;
+    }
+
+    /* 「戻るリンク」の上の余白（固定ヘッダー対策） */
+    .back-to-news {
+        padding-top: 140px !important;
+        margin-bottom: 40px !important;
+    }
+
+    .event-meta-date {
+        font-size: 16px !important;
+        color: #c47a2c !important;
+        margin: 0 0 5px 0 !important;
+    }
+
+    .event-main-title {
+        font-size: 32px !important;
+        line-height: 1.4 !important;
+        padding-bottom: 35px !important;
+    }
+
+    .event-lead-text p {
+        font-size: 16px !important;
+        color: #f5f5f5 !important;
+
+    }
+
+    /* ===================================================
+   【ゲーム紹介エリア】レスポンシブ・横並びCSS
+   =================================================== */
+    .game-list {
+        flex-direction: row !important;
+        /* 💡 横並びに変更 */
+        justify-content: space-between !important;
+        /* 左右のカードの端を揃える */
+        gap: 4% !important;
+        /* 💡 カードとカードの間の「横の隙間」 */
+        align-items: flex-start !important;
+        /* カードの縦幅が違っても上が揃うようにする */
+    }
+
+    .game-card {
+        /* 💡 2つのカードを横並びにするため、幅をそれぞれ「48%」にします */
+        width: 48% !important;
+        margin: 0 !important;
+        padding: 30px !important;
+        /* PC版は少し中身の余白を広げてゆったり見せる */
+    }
+
+    /* -------------------------
+       CTA
+       1. 横いっぱいに広げる
+       2. 背景画像をデスクトップ版に変更
+       ------------------------- */
+    .cta {
+        width: 100vw !important;
+        max-width: none !important;
+        margin-left: calc(-50vw + 50%) !important;
+        margin-right: calc(-50vw + 50%) !important;
+        margin-top: 50px;
+        padding: 120px 20px 180px 20px !important;
+
+        background-image:
+            linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),
+            url(../img/CTA-desktop.png) !important;
+        background-size: cover !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+    }
+
+    .cta-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .cta h2 {
+        font-size: 36px;
+        line-height: 1.4;
+        margin-bottom: 12px;
+    }
+
+    .cta p {
+        font-size: 18px;
+        margin-bottom: 32px;
+    }
+
+    .cta-btn {
+        display: inline-block;
+        padding: 10px 56px;
+        border-radius: 999px;
+        font-size: 16px;
+    }
+
+    .copyright {
+        grid-column: 1 / -1;
+        text-align: center;
+        margin-top: 50px;
+        padding-top: 24px;
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
+}

@@ -1,0 +1,598 @@
+/* 全体のリセットと共通設定 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #0f0f0f;
+  color: #f5f5f5;
+  font-family: 'Noto Sans JP', sans-serif;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 20px;
+  background-color: #0f0f0f;
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   ヘッダー基本レイアウト (スマホ版・モバイルファースト)
+   ========================================================================== */
+.header {
+  display: flex;
+  justify-content: space-between;
+  /* これで「左・中央・右」に3分割されます */
+  align-items: center;
+  padding: 10px 15px;
+  background-color: #000;
+  /* 背景色（お店の雰囲気に合わせて調整してください） */
+  position: relative;
+  z-index: 100;
+}
+
+/* チェックボックス本体は画面から完全に隠す */
+#menu-toggle {
+  display: none;
+}
+
+/* --- 左側：ハンバーガーボタン --- */
+.menu-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 20px;
+  cursor: pointer;
+  z-index: 110;
+  /* メニューが開いた時も、その上に表示させるため */
+}
+
+/* 三本線の線のスタイル */
+.menu-btn span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #fff;
+  /* 線の色（白） */
+  transition: all 0.3s ease;
+  /* アニメーションを滑らかに */
+}
+
+/* --- 中央：ロゴ --- */
+.logo {
+  max-width: 120px;
+  /* スマホ画面で大きくなりすぎないようにサイズを制限 */
+  margin: 0;
+  margin-left: 50px;
+}
+
+.logo a {
+  display: block;
+}
+
+.logo img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* --- 右側：CTAボタン（ご予約はこちら） --- */
+.reserve-btn {
+  background-color: #d18d43;
+  /* ロゴやお店に合わせたオレンジ・ゴールド系 */
+  color: #fff;
+  text-decoration: none;
+  font-size: 11px;
+  padding: 8px 12px;
+  border-radius: 20px;
+  /* 角を丸くしてボタンらしく */
+  font-weight: bold;
+  white-space: nowrap;
+  /* 文字が途中で改行されるのを防ぐ */
+}
+
+
+/* ==========================================================================
+     スマホ用メニューの開閉アニメーション（スライドイン）
+     ========================================================================== */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  /* 最初は画面の左外に隠しておく */
+  width: 70%;
+  /* メニューの横幅（画面の7割の大きさ） */
+  height: 100vh;
+  background-color: #111;
+  /* メニュー内の背景色（濃いグレー） */
+  padding-top: 80px;
+  /* ヘッダーのボタン類と被らないように上に余白を作る */
+  transition: all 0.3s ease;
+  z-index: 105;
+}
+
+.mobile-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mobile-menu ul li a {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  padding: 15px 25px;
+  font-size: 16px;
+  border-bottom: 1px solid #222;
+  /* メニュー項目ごとの区切り線 */
+}
+
+/* --- 背景のオーバーレイ（メニューが開いた時の暗幕） --- */
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  /* 画面を60%暗くする */
+  z-index: 102;
+}
+
+
+/* ==========================================================================
+     【CSSトリック】チェックボックスがON（開いた時）のスタイルチェンジ
+     ========================================================================== */
+
+/* 1. メニューを画面内（左端）にスライドさせて表示 */
+#menu-toggle:checked~.mobile-menu {
+  left: 0;
+}
+
+/* 2. 背景の暗幕を表示 */
+#menu-toggle:checked~.overlay {
+  display: block;
+}
+
+/* 3. ハンバーガーボタンの三本線を「×」に変形させる */
+#menu-toggle:checked~.menu-btn span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+
+#menu-toggle:checked~.menu-btn span:nth-child(2) {
+  opacity: 0;
+  /* 真ん中の線を消す */
+}
+
+#menu-toggle:checked~.menu-btn span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+
+
+
+
+/* 戻るリンク */
+.back-to-news {
+  padding-top: 20px;
+}
+
+.back-to-news a {
+  color: #888888;
+  text-decoration: none;
+  font-size: 0.85rem;
+}
+
+/* メインコンテンツエリア */
+.event-detail {
+  padding: 30px 0;
+}
+
+.event-meta-date {
+  color: #c47a2c;
+  font-size: 0.9rem;
+  font-family: 'Montserrat', sans-serif;
+  margin-bottom: 10px;
+}
+
+.event-main-title {
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-size: 1.45rem;
+  line-height: 1.4;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+
+.event-image-box {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 25px;
+  border: 1px solid #262626;
+}
+
+.event-img-dummy {
+  width: 100%;
+  height: auto;
+  display: block;
+  background-color: #121212;
+}
+
+.event-lead-text {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: #f5f5f5;
+  margin-bottom: 35px;
+}
+
+.event-lead-text p {
+  margin-bottom: 15px;
+}
+
+/* 特典・料金カード */
+.event-highlight-card {
+  background-color: #121212;
+  border: 2px solid #c47a2c;
+  border-radius: 16px;
+  padding: 25px 20px;
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.highlight-title {
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-size: 1.2rem;
+  color: #c47a2c;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.price-box {
+  border-bottom: 1px dashed #262626;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+}
+
+.price-label,
+.period-label {
+  font-size: 0.8rem;
+  color: #888888;
+  margin-bottom: 5px;
+}
+
+.price-amount {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.price-number {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.2rem;
+  color: #ffffff;
+  margin: 0 4px;
+}
+
+.period-text {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.period-number {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.8rem;
+  color: #c47a2c;
+  margin: 0 2px;
+}
+
+/* アピールポイント */
+.event-points {
+  margin-bottom: 20px;
+}
+
+.point-item {
+  background-color: #121212;
+  border: 1px solid #262626;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 15px;
+}
+
+.point-item h3 {
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-size: 1.05rem;
+  color: #ffffff;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.point-item p {
+  font-size: 0.85rem;
+  color: #888888;
+  line-height: 1.6;
+}
+
+/* CTAセクション */
+.cta-btn {
+  display: inline-block;
+  margin-top: 32px;
+  background: #c47a2c;
+  color: #f5f5f5;
+  padding: 18px 48px;
+  font-family: 'Noto Sans JP', sans-serif;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.cta-btn:hover {
+  opacity: 0.8;
+}
+
+.cta {
+  width:100vw !important;
+  margin-left:calc(-50vw + 50%) !important; 
+  margin-right: calc(-50vw + 50%) !important;
+
+  margin-top:30px;
+  margin-bottom:0;
+
+  background-image: url(../img/CTA-background-mobile.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: auto !important;
+  padding-top: 40px !important;
+  padding-bottom:30px !important;
+  position: relative;
+
+  box-sizing: border-box;;
+}
+
+.cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.cta-inner {
+  width:100%;
+  padding:0 20px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: #f5f5f5;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+.cta-inner h2{
+  font-size:20px;
+  margin-bottom:6px;
+  color:#f5f5f5;
+}
+
+.cta-inner p{
+  font-size:14px;
+  margin-bottom: 18px;
+  color:#f5f5f5;
+}
+
+/* フッター */
+.copyright {
+  font-size: 12px;
+  color: #777;
+  letter-spacing: 0.08em;
+  text-align: center;
+  padding: 40px 0px 40px;
+}
+
+
+
+
+/* ==========================================================================
+   デスクトップ（PC）版のレスポンシブ対応 (画面横幅 768px 以上)
+   ========================================================================== */
+@media screen and (min-width: 768px) {
+
+  /* 全体を包む外箱 */
+  .container {
+    max-width: 1100px !important;
+    margin: 0 auto !important;
+    padding: 0 20px !important;
+  }
+
+  /* 「戻るリンク」の上の余白（固定ヘッダー対策） */
+  .back-to-news {
+    padding-top: 140px !important;
+    margin-bottom: 40px !important;
+  }
+
+  /* 💡 親要素の設定（ここを起点に下段の横並びを制御します） */
+  .event-detail {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    /* 👈 これがあることで下段が綺麗に横並びになります */
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    gap: 0 !important;
+  }
+
+  /* --------------------------------------------------
+     【上段】左：タイトルエリア ✕ 右：店内画像
+     -------------------------------------------------- */
+
+  /* 左：タイトルエリア（55%幅） */
+  .event-title {
+    width: 55% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* 日付の隙間 */
+  .event-meta-date {
+    font-size: 16px !important;
+    color: #c47a2c;
+    margin: 0 0 5px 0 !important;
+  }
+
+  /* タイトル文字 */
+  .event-main-title {
+    font-size: 32px !important;
+    line-height: 1.4 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* 左：説明文（リード文） */
+  .event-lead-text {
+    width: 55% !important;
+    /* 💡【調整場所】1番目の数値（25px）を変更すると、タイトルとの隙間を自由に変えられます！ */
+    margin:  -100px 0 60px 0 !important;
+    /* 下側を60pxあけて、下段コンテンツとの距離を確保 */
+    padding: 0 !important;
+
+    /* 画像の高さに押し下げられないようにする設定 */
+    clear: left !important;
+    float: left !important;
+  }
+
+  /* 説明文の段落（pタグ）の隙間 */
+  .event-lead-text p {
+    font-size: 16px !important;
+    line-height: 1.8 !important;
+    color: #ccc;
+    margin: 0 0 15px 0 !important;
+  }
+
+  /* 右：店内画像ボックス（40%幅） */
+  .event-image-box {
+    width: 40% !important;
+    /* 画像のトップ位置を、タイトルの1行目の高さ付近まで少し下げる調整 */
+    margin: 45px 0 0 0 !important;
+    padding: 0 !important;
+  }
+
+  /* 店内画像そのもの */
+  .event-img-dummy {
+    width: 100% !important;
+    height: auto !important;
+    border-radius: 8px !important;
+    object-fit: cover;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+
+  /* --------------------------------------------------
+     【下段】左：イベント限定特典 ✕ 右：安心感枠（横並び復活）
+     -------------------------------------------------- */
+
+  /* 左下：イベント限定特典カード */
+  .event-highlight-card {
+    width: 55% !important;
+    /* 上段のタイトルエリアと縦のラインを綺麗に揃えます */
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    clear: left !important;
+    /* 上の説明文からのフロート（回り込み）の影響をカット */
+  }
+
+  /* 右下：おひとり様〜・二軒目〜を包む枠 */
+  .event-points {
+    width: 40% !important;
+    /* 上段の店内画像と縦のラインを綺麗に揃えます */
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    /* 2つのポイント（おひとり様、二軒目）は縦に並べる */
+    gap: 25px !important;
+    /* ポイント同士の上下の隙間 */
+  }
+
+  /* 安心感枠の各アイテム（おひとり様・二軒目）の見た目 */
+  .point-item {
+    margin: 0 !important;
+    background: #111;
+    /* 背景に薄い黒を敷く */
+    padding: 20px !important;
+    border-radius: 6px !important;
+  }
+
+  .point-item h3 {
+    font-size: 18px !important;
+    margin: 0 0 10px 0 !important;
+  }
+
+  .point-item p {
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+    color: #bbb;
+    margin: 0 !important;
+  }
+
+  /* -------------------------
+       CTA
+       1. 横いっぱいに広げる
+       2. 背景画像をデスクトップ版に変更
+       ------------------------- */
+  .cta {
+    width: 100vw !important;
+    max-width: none !important;
+    margin-left: calc(-50vw + 50%) !important;
+    margin-right: calc(-50vw + 50%) !important;
+    margin-top: 50px;
+    padding: 120px 20px 180px 20px !important;
+
+    background-image:
+      linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),
+      url(../img/CTA-desktop.png) !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+  }
+
+  .cta-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .cta h2 {
+    font-size: 36px;
+    line-height: 1.4;
+    margin-bottom: 12px;
+  }
+
+  .cta p {
+    font-size: 18px;
+    margin-bottom: 32px;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    padding: 10px 56px;
+    border-radius: 999px;
+    font-size: 16px;
+  }
+
+  .copyright {
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-top: 50px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+}
