@@ -1,194 +1,509 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-html{
-    scroll-behavior:smooth;
-}
-body{
-    background:#121212;
-    color:#f5f5f5;
-    font-family:'Noto Sans JP',sans-serif;
-    line-height:1.8;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/*====HERO======*/
-.menu-hero{
-    width:100%;
-    height:42vh;
-    min-height:320px;
-
-    background:linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.78)),url(../img/drink-background.png);
-
-    background-size:cover;
-    background-position:center;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    padding:20px;
+html {
+  scroll-behavior: smooth;
 }
-.hero-inner h1{
-    font-family:'Playfair Display',sans-serif;
-    font-size:2.8rem;
-    letter-spacing:4px;
-    margin-bottom:14px;
+
+body {
+  background: #121212;
+  color: #f5f5f5;
+  font-family: 'Noto Sans JP', sans-serif;
+  line-height: 1.8;
 }
-.hero-inner p{
-    font-family:'Zen Maru Gothic',sans-serif;
-    color:#d9d9d9;
-    font-size:0.95rem;
+
+/* ==========================================================================
+   ヘッダー基本レイアウト (スマホ版・モバイルファースト)
+   ========================================================================== */
+.header {
+  display: flex;
+  justify-content: space-between;
+  /* これで「左・中央・右」に3分割されます */
+  align-items: center;
+  padding: 10px 15px;
+  background-color: #121212;
+  /* 背景色（お店の雰囲気に合わせて調整してください） */
+  position: relative;
+  z-index: 100;
+}
+
+/* チェックボックス本体は画面から完全に隠す */
+#menu-toggle {
+  display: none;
+}
+
+/* --- 左側：ハンバーガーボタン --- */
+.menu-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 20px;
+  cursor: pointer;
+  z-index: 110;
+  /* メニューが開いた時も、その上に表示させるため */
+}
+
+/* 三本線の線のスタイル */
+.menu-btn span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #fff;
+  /* 線の色（白） */
+  transition: all 0.3s ease;
+  /* アニメーションを滑らかに */
+}
+
+/* --- 中央：ロゴ --- */
+.logo {
+  max-width: 120px;
+  /* スマホ画面で大きくなりすぎないようにサイズを制限 */
+  margin: 0;
+  margin-left: 50px;
+}
+
+.logo a {
+  display: block;
+}
+
+.logo img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* --- 右側：CTAボタン（ご予約はこちら） --- */
+.reserve-btn {
+  background-color: #d18d43;
+  /* ロゴやお店に合わせたオレンジ・ゴールド系 */
+  color: #fff;
+  text-decoration: none;
+  font-size: 11px;
+  padding: 8px 12px;
+  border-radius: 20px;
+  /* 角を丸くしてボタンらしく */
+  font-weight: bold;
+  white-space: nowrap;
+  /* 文字が途中で改行されるのを防ぐ */
+}
+
+
+/* ==========================================================================
+     スマホ用メニューの開閉アニメーション（スライドイン）
+     ========================================================================== */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  /* 最初は画面の左外に隠しておく */
+  width: 70%;
+  /* メニューの横幅（画面の7割の大きさ） */
+  height: 100vh;
+  background-color: #111;
+  /* メニュー内の背景色（濃いグレー） */
+  padding-top: 80px;
+  /* ヘッダーのボタン類と被らないように上に余白を作る */
+  transition: all 0.3s ease;
+  z-index: 105;
+}
+
+.mobile-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mobile-menu ul li a {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  padding: 15px 25px;
+  font-size: 16px;
+  border-bottom: 1px solid #222;
+  /* メニュー項目ごとの区切り線 */
+}
+
+/* --- 背景のオーバーレイ（メニューが開いた時の暗幕） --- */
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  /* 画面を60%暗くする */
+  z-index: 102;
+}
+
+
+/* ==========================================================================
+     【CSSトリック】チェックボックスがON（開いた時）のスタイルチェンジ
+     ========================================================================== */
+
+/* 1. メニューを画面内（左端）にスライドさせて表示 */
+#menu-toggle:checked~.mobile-menu {
+  left: 0;
+}
+
+/* 2. 背景の暗幕を表示 */
+#menu-toggle:checked~.overlay {
+  display: block;
+}
+
+/* 3. ハンバーガーボタンの三本線を「×」に変形させる */
+#menu-toggle:checked~.menu-btn span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+
+#menu-toggle:checked~.menu-btn span:nth-child(2) {
+  opacity: 0;
+  /* 真ん中の線を消す */
+}
+
+#menu-toggle:checked~.menu-btn span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+.hide-btn {
+  visibility: hidden;
+}
+
+
+
+/* ==========================================================================
+   メニューページのヒーローエリア（見出し）統一スタイル
+   ========================================================================== */
+
+/* 見出し全体の配置調整 */
+.hero-title-area {
+  text-align: center;
+  padding: 90px 20px 40px;
+  /* 上下の余白（他のページと高さを合わせる用） */
+}
+
+/* 上の小さくオレンジ（ゴールド）っぽい英語 */
+.hero-title-area .sub-title {
+  color: #d18d43;
+  /* 他のページと共通のオレンジ・ゴールド系 */
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 0.8rem;
+  /* 小さめサイズ */
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  /* 文字の間隔を少し広げてスタイリッシュに */
+  text-transform: uppercase;
+  /* 自動で大文字にする */
+  margin-bottom: 10px;
+  /* 下の「メニュー表」との隙間 */
+}
+
+
+.main-title {
+  color: #f5f5f5;
+  /* 他のページと同じ上品なオフホワイト */
+  font-family: 'Zen Maru Gothic', sans-serif;
+  /* 明朝体からゴシック体へ統一 */
+  font-size: 2.8rem;
+  /* ドンと見やすいサイズ */
+  font-weight: 700;
+  /* 太文字 */
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+.menu-hero {
+  /* [1] 画像の上に75%の濃さの黒いフィルターを重ねて「薄暗く」します */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url('../img/drink-background.png');
+  /* ★用意した画像の名前に変えてください */
+
+  /* [2] 画像を画面幅いっぱいに綺麗にフィットさせる設定 */
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  /* [3] 高さをしっかり出すための設定（余白を広めに取ります） */
+  width: 100%;
 }
 
 /*=====MAIN=====*/
-.menu-area{
-    width:100%;
-    max-width:900px;
-    margin:auto;
-    padding:60px 18px 80px;
+.menu-area {
+  width: 100%;
+  max-width: 900px;
+  margin: auto;
+  padding: 60px 18px 80px;
 }
 
 /*=====RECOMMEND=====*/
-.recommend{
-    background:#1a1a1a;
-    border:1px solid rgba(196,122,44,0.35);
-    border-radius:20px;
-    padding:30px 20px;
-    margin-bottom:60px;
-    text-align:center;
+.recommend {
+  background: #1a1a1a;
+  border: 1px solid rgba(196, 122, 44, 0.35);
+  border-radius: 20px;
+  padding: 30px 20px;
+  margin-bottom: 60px;
+  text-align: center;
 }
-.recommend h2{
-    font-family:'Playfair Display',sans-serif;
-    color:#d88a3d;
-    letter-spacing:3px;
-    font-size:1.8rem;
-    margin-bottom:20px;
+
+.recommend h2 {
+  font-family: 'Playfair Display', sans-serif;
+  color: #d88a3d;
+  letter-spacing: 3px;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
 }
-.recommend p{
-    margin-bottom:10px;
-    font-size:1rem;
+
+.recommend p {
+  margin-bottom: 10px;
+  font-size: 1rem;
 }
 
 /*=====SECTION TITLE======*/
-.section-title{
-    text-align:center;
-    font-family:'Playfair Display',sans-serif;
-    font-size:2.2rem;
-    letter-spacing:4px;
-    color:#d88a3d;
-    margin-bottom:34px;
+.section-title {
+  text-align: center;
+  font-family: 'Playfair Display', sans-serif;
+  font-size: 2.2rem;
+  letter-spacing: 4px;
+  color: #d88a3d;
+  margin-bottom: 34px;
 }
 
 /*=====CATEGORY=======*/
-.menu-category{
-    background:#1a1a1a;
-    border-radius:18px;
-    padding:24px 18px;
-    margin-bottom:22px;
-    border:1px solid rgba(255,255,255,0.05)
+.menu-category {
+  background: #1a1a1a;
+  border-radius: 18px;
+  padding: 24px 18px;
+  margin-bottom: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.05)
 }
-.menu-category h3{
-    font-family:'Zen Maru Gothic',sans-serif;
-    color:#d88a3d;
-    font-size:1rem;
-    letter-spacing:2px;
-    margin-bottom:18px;
-    padding-left:10px;
-    border-left:3px solid #c47a2c;
+
+.menu-category h3 {
+  font-family: 'Zen Maru Gothic', sans-serif;
+  color: #d88a3d;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  margin-bottom: 18px;
+  padding-left: 10px;
+  border-left: 3px solid #c47a2c;
 }
 
 /*======MENU ITEM=======*/
-.menu-item{
-    display:flex;
-    justify-content: space-between;
-    align-items:center;
-    gap:20px;
-    padding:13px 0;
-    border-bottom:1px solid rgba(255,255,255,0.06);
-}
-.menu-item:last-child{
-    border-bottom;none;
-}
-.menu-name{
-    color:#f5f5f5;
-    font-size:0.96rem;
-}
-.price{
-    font-family:'Montserrat',sans-serif;
-    color:#d88a3d;
-    font-size:0.95rem;
-    white-space:nowrap;
-}
-summary{
-    display:flex;
-    align-items: center;
-
-    list-style:none;
-    cursor:pointer;
-    font-family:'Zen Maru Gothic',sans-serif;
-    color:#d88a3d;
-    padding:5px 0;
-    letter-spacing:2px;
-
-    gap:10px;
-    cursor:pointer;
-}
-summary::-webkit-details-marker{
-    display:none;
-}
-summary::after{
-    content:"▼";
-    margin-left:auto;
-    font-size:.9rem;
-    transition:.3s;
-}
-details[open] summary::after{
-    transform:rotate(180deg);
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 13px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-
-
-/*======TABLET======*/
-@media(min-width:768px){
-    .menu-hero{
-        height:50vh;
-    }
-    .hero-inner h1{
-        font-size:4.5rem;
-    }
-    .hero-inner p{
-        font-size:1.1rem;
-    }
-    .menu-area{
-        padding:90px 40px;
-    }
-    .menu-category{
-        padding:30px;
-    }
-    .menu-name{
-        font-size:1rem;
-    }
-    .price{
-        font-size:1rem;
-    }
+.menu-item:last-child {
+  border-bottom;
+  none;
 }
+
+.menu-name {
+  color: #f5f5f5;
+  font-size: 0.96rem;
+}
+
+.price {
+  font-family: 'Montserrat', sans-serif;
+  color: #d88a3d;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+summary {
+  display: flex;
+  align-items: center;
+
+  list-style: none;
+  cursor: pointer;
+  font-family: 'Zen Maru Gothic', sans-serif;
+  color: #d88a3d;
+  padding: 5px 0;
+  letter-spacing: 2px;
+
+  gap: 10px;
+  cursor: pointer;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+summary::after {
+  content: "▼";
+  margin-left: auto;
+  font-size: .9rem;
+  transition: .3s;
+}
+
+details[open] summary::after {
+  transform: rotate(180deg);
+}
+
+.copyright {
+  font-size: 12px;
+  color: #777;
+  letter-spacing: 0.08em;
+  text-align: center;
+  padding-bottom: 40px;
+}
+
+
+
 
 
 /*=======PC======*/
-@media(min-width:1024px){
-    .menu-area{
-        padding:100px 50px;
-    }
-    .section-title{
-        font-size:2.5rem;
-    }
-    .menu-category{
-        transition:0.3s;
-    }
-    .menu-category:hover{
-        transform:translateY(-4px);
-        border:1px solid rgba(216,138,61,0.25);
-    }
+@media screen and (min-width: 768px) {
+  .menu-area {
+    padding: 100px 50px;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+  }
+
+  .menu-category {
+    transition: 0.3s;
+  }
+
+  .menu-category:hover {
+    transform: translateY(-4px);
+    border: 1px solid rgba(216, 138, 61, 0.25);
+  }
+
+  /* --- 0. 全体の共通設定 --- */
+  section {
+    max-width: 1200px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding: 80px 40px !important;
+  }
+
+
+  /* --- 1. ヘッダーの調整 (左:ロゴ / 中:メニュー / 右:CTA) --- */
+  header.header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 10px 40px !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    z-index: 100 !important;
+    background: transparent !important;
+  }
+
+  #menu-toggle,
+  .menu-btn,
+  .overlay {
+    display: none !important;
+  }
+
+  .logo {
+    margin: 0 !important;
+    order: 1 !important;
+  }
+
+  .logo img {
+    width: 220px !important;
+    height: auto !important;
+    display: block !important;
+  }
+
+  .mobile-menu {
+    display: block !important;
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+    background: transparent !important;
+    margin-left: auto !important;
+    margin-right: 40px !important;
+    order: 2 !important;
+  }
+
+  .mobile-menu ul {
+    display: flex !important;
+    gap: 40px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+  }
+
+  .mobile-menu a {
+    font-size: 16px !important;
+    font-weight: bold !important;
+    letter-spacing: 0.1em !important;
+    color: #fff !important;
+    text-decoration: none !important;
+  }
+
+  .reserve-btn {
+    position: static !important;
+    order: 3 !important;
+    margin: 0 !important;
+    padding: 12px 24px !important;
+    font-size: 14px !important;
+    white-space: nowrap !important;
+  }
+
+
+  /* ヘッダー分の余白をPC用に微調整 */
+  .menu-hero,
+  .hero-section {
+    padding-top: 120px !important; 
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    overflow: hidden;
+  }
+
+  /* メイン画像を横いっぱいに伸ばし、高さを固定して綺麗にトリミング */
+  .menu-hero img,
+  .hero-section img {
+    width: 100% !important;
+    height: 400px !important;    /* PCでの画像の高さ（好みに合わせて変更可） */
+    object-fit: cover !important; /* 画像を歪ませずに引き伸ばす設定 */
+    display: block;
+  }
+
+  /* アコーディオンメニュー全体が横に広がりすぎないように中央寄せ */
+  .menu-container,
+  .recommend-section,
+  .drink-section {
+    max-width: 750px !important; /* 視線が散らばらないベストな横幅 */
+    margin: 60px auto !important; /* 上下に余白を作りつつ中央寄せ */
+    padding: 0 20px !important;
+  }
+
+  /* アコーディオン（BEER等）のボタン調整 */
+  summary {
+    padding: 24px 30px !important; /* ボタン内の余白を広げて押しやすく */
+    font-size: 18px !important;
+    cursor: pointer;               /* マウスを乗せたら指マークにする */
+  }
+
+  /* 開いたときの中身（商品名と価格）の横並び調整 */
+  .menu-item {
+    display: flex !important;
+    justify-content: space-between; /* 左に商品名、右に値段 */
+    align-items: center;
+    padding: 18px 40px !important;
+    border-bottom: 1px solid #333; /* 商品ごとの区切り線 */
+    font-size: 16px !important;
+  }
+  .menu-item:last-child {
+    border-bottom: none;
+  }
 }

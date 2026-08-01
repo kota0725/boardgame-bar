@@ -1,174 +1,516 @@
 /*======RESET========*/
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body{
-    background:#121212;
-    color:#f5f5f5;
-    font-family:'Noto Sans JP',sans-serif;
-    line-height:1.7;
+body {
+  background: #121212;
+  color: #f5f5f5;
+  font-family: 'Noto Sans JP', sans-serif;
+  line-height: 1.7;
+}
+
+/* ==========================================================================
+   ヘッダー基本レイアウト (スマホ版・モバイルファースト)
+   ========================================================================== */
+.header {
+  display: flex;
+  justify-content: space-between;
+  /* これで「左・中央・右」に3分割されます */
+  align-items: center;
+  padding: 10px 15px;
+  background-color: #121212;
+  /* 背景色（お店の雰囲気に合わせて調整してください） */
+  position: relative;
+  z-index: 100;
+}
+
+/* チェックボックス本体は画面から完全に隠す */
+#menu-toggle {
+  display: none;
+}
+
+/* --- 左側：ハンバーガーボタン --- */
+.menu-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 20px;
+  cursor: pointer;
+  z-index: 110;
+  /* メニューが開いた時も、その上に表示させるため */
+}
+
+/* 三本線の線のスタイル */
+.menu-btn span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #fff;
+  /* 線の色（白） */
+  transition: all 0.3s ease;
+  /* アニメーションを滑らかに */
+}
+
+/* --- 中央：ロゴ --- */
+.logo {
+  max-width: 120px;
+  /* スマホ画面で大きくなりすぎないようにサイズを制限 */
+  margin: 0;
+  margin-left: 50px;
+}
+
+.logo a {
+  display: block;
+}
+
+.logo img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* --- 右側：CTAボタン（ご予約はこちら） --- */
+.reserve-btn {
+  background-color: #d18d43;
+  /* ロゴやお店に合わせたオレンジ・ゴールド系 */
+  color: #fff;
+  text-decoration: none;
+  font-size: 11px;
+  padding: 8px 12px;
+  border-radius: 20px;
+  /* 角を丸くしてボタンらしく */
+  font-weight: bold;
+  white-space: nowrap;
+  /* 文字が途中で改行されるのを防ぐ */
+}
+
+
+/* ==========================================================================
+     スマホ用メニューの開閉アニメーション（スライドイン）
+     ========================================================================== */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  /* 最初は画面の左外に隠しておく */
+  width: 70%;
+  /* メニューの横幅（画面の7割の大きさ） */
+  height: 100vh;
+  background-color: #111;
+  /* メニュー内の背景色（濃いグレー） */
+  padding-top: 80px;
+  /* ヘッダーのボタン類と被らないように上に余白を作る */
+  transition: all 0.3s ease;
+  z-index: 105;
+}
+
+.mobile-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mobile-menu ul li a {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  padding: 15px 25px;
+  font-size: 16px;
+  border-bottom: 1px solid #222;
+  /* メニュー項目ごとの区切り線 */
+}
+
+/* --- 背景のオーバーレイ（メニューが開いた時の暗幕） --- */
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  /* 画面を60%暗くする */
+  z-index: 102;
+}
+
+
+/* ==========================================================================
+     【CSSトリック】チェックボックスがON（開いた時）のスタイルチェンジ
+     ========================================================================== */
+
+/* 1. メニューを画面内（左端）にスライドさせて表示 */
+#menu-toggle:checked~.mobile-menu {
+  left: 0;
+}
+
+/* 2. 背景の暗幕を表示 */
+#menu-toggle:checked~.overlay {
+  display: block;
+}
+
+/* 3. ハンバーガーボタンの三本線を「×」に変形させる */
+#menu-toggle:checked~.menu-btn span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+
+#menu-toggle:checked~.menu-btn span:nth-child(2) {
+  opacity: 0;
+  /* 真ん中の線を消す */
+}
+
+#menu-toggle:checked~.menu-btn span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+.hide-btn {
+  visibility: hidden;
 }
 
 /*-----HERO------*/
-.reserve-hero{
-    position:relative;
-    height:55vh;
+.reserve-hero {
+  position: relative;
+  height: 55vh;
 
-    background-image:linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.65)),url(../img/tana.png);
-    background-size:cover;
-    background-position:center;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.65)), url(../img/tana.png);
+  background-size: cover;
+  background-position: center;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    padding:0 24px;
-    text-align:center;
+  padding: 0 24px;
+  text-align: center;
 }
-.hero-content{
-    position:relative;
-    z-index:2;
-}
-.reserve-sub{
-    font-family:'Playfair Display',sans-serif;
-    font-size:0.9rem;
-    letter-spacing:4px;
-    color:#d88a3d;
 
-    margin-bottom:14px;
+.hero-content {
+  position: relative;
+  z-index: 2;
 }
-.reserve-hero h1{
-    font-family:'Zen Maru Gothic',sans-serif;
-    font-size:2rem;
-    line-height:1.4;
-    margin-bottom:18px;
+
+.reserve-sub {
+  font-family: 'Playfair Display', sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 4px;
+  color: #d88a3d;
+
+  margin-bottom: 14px;
 }
-.hero-text{
-    color:#d5d5d5;
-    font-size:0.95rem;
+
+.reserve-hero h1 {
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-size: 2rem;
+  line-height: 1.4;
+  margin-bottom: 18px;
+}
+
+.hero-text {
+  color: #d5d5d5;
+  font-size: 0.95rem;
 }
 
 /*=====FORM SECTION=======*/
-.reserve-section{
-    padding:60px 20px 80px;
+.reserve-section {
+  padding: 60px 20px 80px;
 }
-.reserve-card{
-    background:#181818;
-    border-radius:18px;
-    padding:32px 22px;
-    border:1px solid rgba(255,255,255,0.06);
 
-    max-width:700px;
-    margin:0 auto;
+.reserve-card {
+  background: #181818;
+  border-radius: 18px;
+  padding: 32px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+
+  max-width: 700px;
+  margin: 0 auto;
 }
-.reserve-card h2{
-    font-family:'Playfair Display',sans-serif;
-    font-size:1.5rem;
 
-    margin-bottom:30px;
-    text-align:center;
+.reserve-card h2 {
+  font-family: 'Playfair Display', sans-serif;
+  font-size: 1.5rem;
 
-    color:#d88a3d;
+  margin-bottom: 30px;
+  text-align: center;
+
+  color: #d88a3d;
 }
 
 /*=====FORM======*/
-.form-group{
-    margin-bottom:24px;
+.form-group {
+  margin-bottom: 24px;
 }
-.form-group label{
-    display:block;
-    margin-bottom:8px;
-    font-size:0.95rem;
-    color:#eaeaea;
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  color: #eaeaea;
 }
-.form-group input,.form-group select,.form-group textarea{
-    width:100%;
-    background:#222;
-    border:1px solid rgba(255,255,255,0.08);
-    border-radius:12px;
-    padding:14px 16px;
-    color:#f5f5f5;
-    font-size:1rem;
-    font-family:'Noto Sans JP',sans-serif;
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  background: #222;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 14px 16px;
+  color: #f5f5f5;
+  font-size: 1rem;
+  font-family: 'Noto Sans JP', sans-serif;
 }
-.form-group input:focus,.form-group select:focus,.form-group textarea:focus{
-    outline:none;
-    border-color:#d88a3d;
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #d88a3d;
 }
-.form-group textarea{
-    resize:vertical;
+
+.form-group textarea {
+  resize: vertical;
+}
+
+/* 日付・時間アイコンを白く */
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
 }
 
 /*=====NOTICE======*/
 .notice-box {
-    margin-top:36px;
-    background:#141414;
-    border-left:3px solid #c47a2c;
-    padding:20px;
-    border-radius:10px;
-}
-.notice-box h3{
-    font-size:1rem;
-    margin-bottom:12px;
-    color:#d88a3d;
-}
-.notice-box ul{
-    padding-left:18px;
-}
-.notice-box li{
-    color:#cfcfcf;
-    font-size:0.9rem;
-    margin-bottom:8px;
+  margin-top: 36px;
+  background: #141414;
+  border-left: 3px solid #c47a2c;
+  padding: 20px;
+  border-radius: 10px;
 }
 
-/*======WELLCOME TEXT======*/
-.welcome-text{
-    text-align:center;
-    margin-top:28px;
-    margin-bottom:28px;
-    color:#aaa;
-    font-size:0.9rem;
+.notice-box h3 {
+  font-size: 1rem;
+  margin-bottom: 12px;
+  color: #d88a3d;
 }
+
+.notice-box ul {
+  padding-left: 18px;
+}
+
+.notice-box li {
+  color: #cfcfcf;
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+
+.privacy-check {
+  text-align: center;
+  margin: 25px 0 20px;
+  font-size: 0.85rem;
+  /* スマホで見やすいように少しコンパクトに */
+}
+
+.privacy-check label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  /* チェックボックスと文字の間隔 */
+  cursor: pointer;
+  color: #ccc;
+  line-height: 1.4;
+}
+
+/* チェックボックス自体の見た目調整 */
+.privacy-check input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #d88a3d;
+  /* チェックが入ったときの色をお店のオレンジ色に */
+  cursor: pointer;
+}
+
+/* リンクテキスト（プライバシーポリシー）の装飾 */
+.privacy-check a {
+  color: #d88a3d;
+  text-decoration: underline;
+  transition: opacity 0.3s ease;
+}
+
+.privacy-check a:hover {
+  opacity: 0.8;
+}
+
+
 
 /*======BUTTON=======*/
-.submit-btn{
-    width:100%;
-    height:56px;
-    border:none;
-    border-radius:999px;
-    background:#c47a2c;
-    color:#f5f5f5;
+.submit-btn {
+  width: 100%;
+  height: 56px;
+  border: none;
+  border-radius: 999px;
+  background: #c47a2c;
+  color: #f5f5f5;
 
-    font-size:1rem;
-    font-weight:500;
+  font-size: 1rem;
+  font-weight: 500;
 
-    font-family: 'Noto Sans JP',sans-serif;
-    cursor:pointer;
-    transition:0.3s;
-}
-.submit-btn:hover{
-    background:#d88a3d;
-    transform:translateY(-2px);
+  font-family: 'Noto Sans JP', sans-serif;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
+.submit-btn:hover {
+  background: #d88a3d;
+  transform: translateY(-2px);
+}
+
+.copyright {
+  font-size: 12px;
+  color: #777;
+  letter-spacing: 0.08em;
+  text-align: center;
+  padding-bottom: 40px;
+}
 
 
-/*==========
-============TABLET & PC===========*/
-@media(min-width:768px){
-    .reserve-hero{
-        height:65vh;
-    }
-    .reserve-hero h1{
-        font-size:3rem;
-    }
-    .hero-text{
-        font-size:1rem;
-    }
-    .reserve-card{
-        padding:48px;
-    }
+/* ==========================================================================
+   デスクトップ（PC）版のレスポンシブ対応 (画面横幅 768px 以上)
+   ========================================================================== */
+@media screen and (min-width: 768px) {
+
+
+  /* --- 0. 全体の共通設定 --- */
+  section {
+    max-width: 1200px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding: 80px 40px !important;
+  }
+
+
+  /* --- 1. ヘッダーの調整 (左:ロゴ / 中:メニュー / 右:CTA) --- */
+  header.header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 10px 40px !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    z-index: 100 !important;
+    background: transparent !important;
+  }
+
+  #menu-toggle,
+  .menu-btn,
+  .overlay {
+    display: none !important;
+  }
+
+  .logo {
+    margin: 0 !important;
+    order: 1 !important;
+  }
+
+  .logo img {
+    width: 220px !important;
+    height: auto !important;
+    display: block !important;
+  }
+
+  .mobile-menu {
+    display: block !important;
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+    background: transparent !important;
+    margin-left: auto !important;
+    margin-right: 40px !important;
+    order: 2 !important;
+  }
+
+  .mobile-menu ul {
+    display: flex !important;
+    gap: 40px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+  }
+
+  .mobile-menu a {
+    font-size: 16px !important;
+    font-weight: bold !important;
+    letter-spacing: 0.1em !important;
+    color: #fff !important;
+    text-decoration: none !important;
+  }
+
+  .reserve-btn {
+    position: static !important;
+    order: 3 !important;
+    margin: 0 !important;
+    padding: 12px 24px !important;
+    font-size: 14px !important;
+    white-space: nowrap !important;
+  }
+
+
+
+  /* 画像の上の余白・全幅化をすべてPC版の中だけで実行 */
+  .reserve-hero,
+  .hero-section {
+    padding-top: 180px !important;
+    /* PCヘッダーの下に強力に押し下げ */
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    overflow: hidden;
+    background-color: #000;
+  }
+
+  /* 背景画像を横いっぱいに伸ばす（メニュー表と統一） */
+  .reserve-hero img,
+  .hero-section img {
+    width: 100% !important;
+    height: 400px !important;
+    object-fit: cover !important;
+    display: block;
+  }
+
+  /* その下の予約フォームやコンテンツの横幅を制御 */
+  main,
+  .reserve-page-container {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+
+  /* フォームをメニュー表と同じ750px幅に統一して中央寄せ */
+  form,
+  .form-container,
+  .reserve-container {
+    max-width: 750px !important;
+    margin: 60px auto !important;
+    padding: 0 20px !important;
+  }
+
+  .privacy-check {
+    margin: 30px 0 25px;
+    /* PC画面に合わせて上下の余白を少し広げる */
+    font-size: 0.95rem;
+    /* 文字サイズをPC用に調整 */
+  }
+
+  .privacy-check input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    /* PCで見やすいようにチェックボックスをほんの少し大きく */
+  }
 }

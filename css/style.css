@@ -19,53 +19,173 @@ body {
     font-family: 'Noto Sana JP', sans-serif, 'Zen Maru Gothic', 'Playfair Display';
 }
 
-/*header*/
+
+
+
+/* ==========================================================================
+   ヘッダー基本レイアウト (スマホ版・モバイルファースト)
+   ========================================================================== */
 .header {
+    display: flex;
+    justify-content: space-between;
+    /* これで「左・中央・右」に3分割されます */
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #121212;
+    /* 背景色（お店の雰囲気に合わせて調整してください） */
     position: relative;
+    z-index: 100;
+}
+
+/* チェックボックス本体は画面から完全に隠す */
+#menu-toggle {
+    display: none;
+}
+
+/* --- 左側：ハンバーガーボタン --- */
+.menu-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    cursor: pointer;
+    z-index: 110;
+    /* メニューが開いた時も、その上に表示させるため */
+}
+
+/* 三本線の線のスタイル */
+.menu-btn span {
+    display: block;
     width: 100%;
-    height: 90px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    padding: 0 20px;
-
-    background: #000;
+    height: 2px;
+    background-color: #fff;
+    /* 線の色（白） */
+    transition: all 0.3s ease;
+    /* アニメーションを滑らかに */
 }
 
-/*上部分*/
-.header-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-/*ロゴ*/
+/* --- 中央：ロゴ --- */
 .logo {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    max-width: 120px;
+    /* スマホ画面で大きくなりすぎないようにサイズを制限 */
+    margin: 0;
+    margin-left: 50px;
+}
+
+.logo a {
+    display: block;
 }
 
 .logo img {
-    height: 80px;
+    width: 100%;
+    height: auto;
     display: block;
 }
+
+/* --- 右側：CTAボタン（ご予約はこちら） --- */
+.reserve-btn {
+    background-color: #d18d43;
+    /* ロゴやお店に合わせたオレンジ・ゴールド系 */
+    color: #fff;
+    text-decoration: none;
+    font-size: 11px;
+    padding: 8px 12px;
+    border-radius: 20px;
+    /* 角を丸くしてボタンらしく */
+    font-weight: bold;
+    white-space: nowrap;
+    /* 文字が途中で改行されるのを防ぐ */
+}
+
+
+/* ==========================================================================
+     スマホ用メニューの開閉アニメーション（スライドイン）
+     ========================================================================== */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    /* 最初は画面の左外に隠しておく */
+    width: 70%;
+    /* メニューの横幅（画面の7割の大きさ） */
+    height: 100vh;
+    background-color: #111;
+    /* メニュー内の背景色（濃いグレー） */
+    padding-top: 80px;
+    /* ヘッダーのボタン類と被らないように上に余白を作る */
+    transition: all 0.3s ease;
+    z-index: 105;
+}
+
+.mobile-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mobile-menu ul li a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    padding: 15px 25px;
+    font-size: 16px;
+    border-bottom: 1px solid #222;
+    /* メニュー項目ごとの区切り線 */
+}
+
+/* --- 背景のオーバーレイ（メニューが開いた時の暗幕） --- */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    /* 画面を60%暗くする */
+    z-index: 102;
+}
+
+
+/* ==========================================================================
+     【CSSトリック】チェックボックスがON（開いた時）のスタイルチェンジ
+     ========================================================================== */
+
+/* 1. メニューを画面内（左端）にスライドさせて表示 */
+#menu-toggle:checked~.mobile-menu {
+    left: 0;
+}
+
+/* 2. 背景の暗幕を表示 */
+#menu-toggle:checked~.overlay {
+    display: block;
+}
+
+/* 3. ハンバーガーボタンの三本線を「×」に変形させる */
+#menu-toggle:checked~.menu-btn span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+
+#menu-toggle:checked~.menu-btn span:nth-child(2) {
+    opacity: 0;
+    /* 真ん中の線を消す */
+}
+
+#menu-toggle:checked~.menu-btn span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+
+
+
+
+
 
 /*=======
 =========
 =========ボタン========*/
-.reserve-btn {
-    text-decoration: none;
-    margin-left: auto;
-    background: #d48b36;
-    color: #f5f5f5;
-    padding: 10px 18px;
-    border-radius: 999px;
-    font-size: 14px;
-    transition: 0.3s;
-}
+
 
 .about-btn {
     display: inline-block;
@@ -88,21 +208,6 @@ body {
     border-color: #c47a2c;
 }
 
-.menu-btn {
-    position: relative;
-    width: 30px;
-    height: 24px;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    background: transparent;
-
-    cursor: pointer;
-
-    z-index: 1002;
-}
 
 .menu-link {
     display: inline-block;
@@ -122,26 +227,6 @@ body {
     color: #121212;
 }
 
-/*チェックボタン非表示*/
-#menu-toggle {
-    display: none;
-}
-
-/* 3本線 */
-
-.menu-btn span {
-    position: absolute;
-    left: 0;
-    display: block;
-    width: 30px;
-    height: 3px;
-    margin-bottom: 6px;
-    background: white;
-    border-radius: 999px;
-    transition: .3s;
-}
-
-
 
 .cta-btn {
     display: inline-block;
@@ -159,106 +244,10 @@ body {
     opacity: 0.8;
 }
 
-/*ナビ*/
-/* =========================
-   MOBILE MENU
-========================= */
-
-.mobile-menu {
-    position: fixed;
-    display: none;
-
-    top: 0;
-    left: -100%;
-
-    width: 80%;
-    height: 100vh;
-
-    padding: 120px 40px;
-
-    background: #fff;
-
-    backdrop-filter: blur(10px);
-
-    transition: 0.4s;
-
-    z-index: 1001;
-
-    padding-top: 100px;
-}
-
-
-/* メニューリスト */
-
-.mobile-menu ul {
-    list-style: none;
-}
-
-/* 各項目 */
-
-.mobile-menu li {
-    margin-bottom: 30px;
-    text-align: center;
-}
-
-/* リンク */
-
-.mobile-menu a {
-    color: #fff;
-
-    text-decoration: none;
-
-    font-size: 28px;
-
-    letter-spacing: 0.08em;
-}
-
-/* =========================
-     OVERLAY
-  ========================= */
-
-.overlay {
-    position: fixed;
-    inset: 0;
-
-    background: rgba(0, 0, 0, 0.5);
-
-    opacity: 0;
-
-    visibility: hidden;
-
-    transition: 0.3s;
-
-    z-index: 1040;
-}
-
-/* 開いた時 */
-#menu-toggle:checked~.mobile-menu {
-    left: 0;
-}
-
-/* overlay表示 */
-#menu-toggle:checked~.overlay {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* バツ印 */
-#menu-toggle:checked+.menu-btn span:nth-child(1) {
-    transform: rotate(45deg) translate(7px, 7px);
-}
-
-#menu-toggle:checked+.menu-btn span:nth-child(2) {
-    opacity: 0;
-}
-
-#menu-toggle:checked+.menu-btn span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -7px);
-}
 
 
 
-/*セクション*/
+/*=========セクション=======*/
 .about {
     display: flex;
     align-items: flex-start;
@@ -303,8 +292,8 @@ body {
 
 .game-text {
     margin-bottom: 36px;
-    font-family:'Playfair Display',sans-serif;
-    color:#f5f5f5;
+    font-family: 'Playfair Display', sans-serif;
+    color: #f5f5f5;
 }
 
 .game-slider {
@@ -337,22 +326,32 @@ body {
 }
 
 .game-link {
-    flex: 0 0 100%;
+    flex: 0 0 65%;
     scroll-snap-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0 24px;
+    padding: 0 15px;
     box-sizing: border-box;
+
+    opacity: 0.3;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: scale(0.9);
+}
+
+.game-link.active {
+    opacity: 1;
+    transform: scale(1);
 }
 
 .game-link img {
-    width: 50%;
+    width: 90%;
     max-width: 300px;
-    
+
     display: block;
     border-radius: 40px;
     overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 /*スクロールバー非表示*/
@@ -464,16 +463,35 @@ body {
 
 .inside-slider {
     display: flex;
-    gap: 16px;
+
     overflow-x: auto;
     margin-top: 32px;
     padding-bottom: 10px;
+
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.inside-slider::-webkit-scrollbar {
+    display: none;
 }
 
 .inside-slider img {
-    width: 85%;
+    width: 65%;
     flex-shrink: 0;
+    scroll-snap-align: center;
     border-radius: 12px;
+
+    opacity: 0.3 transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: scale(0.9);
+    margin: 0 10px;
+}
+
+.inside-slider img.active {
+    opacity: 1;
+    transform: scale(1);
 }
 
 /*最終CTA*/
@@ -588,88 +606,419 @@ body {
 
 
 
-/* =========================
-     PC表示
-  ========================= */
 
-@media screen and (min-width:768px) {
 
-    .header {
-        display: flex;
-        align-items: center;
 
-        height: 80px;
-        padding: 0 40px;
 
-        background: #121212;
+
+
+
+
+/* ==========================================================================
+   デスクトップ（PC）版のレスポンシブ対応 (画面横幅 768px 以上)
+   ========================================================================== */
+@media screen and (min-width: 768px) {
+
+
+    /* --- 0. 全体の共通設定 --- */
+    section {
+        max-width: 1200px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        padding: 80px 40px !important;
     }
 
-    /* ===== ロゴ ===== */
+
+    /* --- 1. ヘッダーの調整 (左:ロゴ / 中:メニュー / 右:CTA) --- */
+    header.header {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 10px 40px !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        z-index: 100 !important;
+        background: transparent !important;
+    }
+
+    #menu-toggle,
+    .menu-btn,
+    .overlay {
+        display: none !important;
+    }
 
     .logo {
-        order: 1;
-        margin: 0;
+        margin: 0 !important;
+        order: 1 !important;
     }
 
     .logo img {
-        width: 120px;
+        width: 220px !important;
+        height: auto !important;
+        display: block !important;
     }
 
-    /* ===== ナビ ===== */
-
     .mobile-menu {
-        order: 2;
-
-        position: static;
-        width: auto;
-        height: auto;
-        background: transparent;
-
-        margin-left: auto;
+        display: block !important;
+        position: static !important;
+        width: auto !important;
+        height: auto !important;
+        background: transparent !important;
+        margin-left: auto !important;
+        margin-right: 40px !important;
+        order: 2 !important;
     }
 
     .mobile-menu ul {
-        display: flex;
-        align-items: center;
-        gap: 40px;
-
-        margin: 0;
-        padding: 0;
-
-        list-style: none;
+        display: flex !important;
+        gap: 40px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        list-style: none !important;
     }
 
     .mobile-menu a {
-        color: #fff;
-        text-decoration: none;
-        font-size: 14px;
-        font-weight: bold;
+        font-size: 16px !important;
+        font-weight: bold !important;
+        letter-spacing: 0.1em !important;
+        color: #fff !important;
+        text-decoration: none !important;
     }
-
-    /* ===== 予約 ===== */
 
     .reserve-btn {
-        order: 3;
-
-        margin-left: 40px;
-
-        padding: 12px 28px;
-
-        border: 1px solid #fff;
-        border-radius: 999px;
-
-        color: #fff;
-        text-decoration: none;
-
-        white-space: nowrap;
+        position: static !important;
+        order: 3 !important;
+        margin: 0 !important;
+        padding: 12px 24px !important;
+        font-size: 14px !important;
+        white-space: nowrap !important;
     }
 
-    /* ===== ハンバーガー消す ===== */
 
-    .menu-btn,
-    .overlay,
-    #menu-toggle {
+    /* --- 2. メインビジュアル（コンセプト欄）の調整 --- */
+    .about {
+        width: 100vw !important;
+        max-width: none !important;
+        margin-left: calc(-50vw + 50%) !important;
+        margin-right: calc(-50vw + 50%) !important;
+        height: 650px !important;
+        background-size: cover !important;
+        background-position: center !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        padding: 100px 20px 0 20px !important;
+        box-sizing: border-box !important;
+    }
+
+    .about-text {
+        max-width: 900px !important;
+        text-align: center !important;
+        margin: 0 auto !important;
+    }
+
+    .about-text h2 {
+        font-size: 3rem !important;
+        line-height: 1.6 !important;
+        margin-bottom: 20px !important;
+        text-shadow: 0 4px 10px rgba(0, 0, 0, 0.8) !important;
+    }
+
+    .about-text p {
+        font-size: 1.2rem !important;
+        line-height: 1.8 !important;
+        margin-bottom: 30px !important;
+        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8) !important;
+    }
+
+
+    /* --- 3. ゲーム導入文の調整（マシだったコードの再現） --- */
+    #games {
+        position: relative;
+    }
+
+    #games h2 {
+        display: inline-block;
+        width: 45%;
+        vertical-align: top;
+        margin-bottom: 40px;
+        font-size: 2.4rem !important;
+        line-height: 1.5 !important;
+        text-align: left !important;
+    }
+
+    .game-description {
+        display: inline-block;
+        width: 50%;
+        vertical-align: top;
+        text-align: left;
+        padding-top: 8px;
+        margin-bottom: 40px;
+        color: #cccccc !important;
+        font-size: 1.1rem !important;
+        line-height: 2.0 !important;
+    }
+
+
+    /* --- 4. ゲーム一覧（マシだったグリッド構造に、サイズ調整だけをプラス） --- */
+    .game-slider {
+        overflow-x: visible !important;
+        clear: both;
+    }
+
+    /* マシだった設定：slider-trackを3列グリッドにする */
+    .slider-track {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 50px 30px !important;
+        /* 隙間を少し広げて貧相さを無くす */
+        width: 100% !important;
+        transform: none !important;
+    }
+
+    .game-link {
+        width: 100% !important;
+        display: block;
+    }
+
+    /* 💡画像調整：全体を表示しつつ、枠いっぱいに大きくして角丸にする */
+    .game-link img {
+        width: 100% !important;
+        height: auto !important;
+        aspect-ratio: 1 / 1 !important;
+        /* 綺麗な正方形にして大きく見せる */
+        object-fit: contain !important;
+        /* 画像全体を絶対に切らずに中央に収める */
+        background-color: #161616;
+        /* 切り取られた隙間を埋める黒背景 */
+        border-radius: 20px !important;
+        /* 💡ご要望：四角い画像に丸み（角丸）をつける */
+        padding: 15px !important;
+        /* 内側に少し余白をとって高級感を出す */
+        box-sizing: border-box !important;
+        border: 1px solid #2a2a2a !important;
+    }
+
+
+
+    /* --- 2. 【Figma再現】メニュー紹介（Food & Drink）を2カラムにする --- */
+    /* 左に文章、右に画像の横並びに切り替えます */
+    .menu-intro {
+        display: flex !important;
+        flex-direction: row !important;
+        /* 横並びにする */
+        align-items: center;
+        /* 縦の真ん中で綺麗に揃える */
+        justify-content: space-between;
+        /* 左右に綺麗に振り分ける */
+        gap: 50px;
+        /* 文章と画像の間のゆったりした隙間 */
+    }
+
+    /* 左側のテキストエリア（幅を全体の45%にして左寄せに） */
+    .menu-text {
+        flex: 1;
+        max-width: 45%;
+        text-align: left;
+    }
+
+    .menu-text h2 {
+        font-size: 2.4rem;
+        font-family: 'Zen Maru Gothic', sans-serif;
+        color: #f5f5f5;
+    }
+
+    .menu-description {
+        font-size: 1.1rem;
+        font-family: 'Noto Sans JP', sans-serif;
+        color: #cccccc;
+    }
+
+    /* 右側の画像エリア（幅を全体の50%に） */
+    .menu-image {
+        flex: 1;
+        max-width: 50%;
+        margin-top: 0 !important;
+        /* スマホ用の上の隙間を消す */
+    }
+
+    .menu-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
+        display: block;
+    }
+
+
+    /* --- 5. 店内一覧 (Store Interior) の調整 --- */
+    /* 💡解決1: スライダーの動きを止め、写真を全体が見えるように美しく配置 */
+    .inside-slider {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        /* 横2列 × 縦2段の田の字型に並べる */
+        gap: 24px !important;
+        /* 写真同士の隙間を上品に空ける */
+        overflow-x: visible !important;
+        width: 100% !important;
+        transform: none !important;
+    }
+
+    .inside-slider img {
+        width: 100% !important;
+        height: auto !important;
+        aspect-ratio: 3 / 2 !important;
+        /* 💡ご要望: 写真全体が1枚ずつしっかり写るように比率を維持 */
+        object-fit: cover !important;
+        /* 比率を保ったまま枠内に綺麗に収める */
+        border-radius: 12px !important;
+        /* 他の画像と合わせて少し角丸に */
+    }
+
+    .inside h2 {
+        font-size: 2.4rem;
+        font-family: 'Zen Maru Gothic', sans-serif;
+        color: #f5f5f5;
+    }
+
+    .inside-description {
+        font-size: 1.1rem;
+        font-family: 'Noto Sans JP', sans-serif;
+        color: #cccccc;
+    }
+
+
+    /* -------------------------
+       CTA
+       1. 横いっぱいに広げる
+       2. 背景画像をデスクトップ版に変更
+       ------------------------- */
+    .cta {
+        width: 100vw !important;
+        max-width: none !important;
+        margin-left: calc(-50vw + 50%) !important;
+        margin-right: calc(-50vw + 50%) !important;
+        padding: 120px 20px 180px 20px !important;
+
+        background-image:
+            linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),
+            url(../img/CTA-desktop.png) !important;
+        background-size: cover !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+    }
+
+    .cta-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .cta h2 {
+        font-size: 36px;
+        line-height: 1.4;
+        margin-bottom: 12px;
+    }
+
+    .cta p {
+        font-size: 18px;
+        margin-bottom: 32px;
+    }
+
+    .cta-btn {
+        display: inline-block;
+        padding: 10px 56px;
+        border-radius: 999px;
+        font-size: 16px;
+    }
+
+    /* -------------------------
+       Footer
+       3. 3列レイアウトにする
+       左：営業時間〜TEL
+       中：top〜プライバシーポリシー
+       右：Instagram
+       ------------------------- */
+    .footer {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 80px;
+        align-items: start;
+
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 80px 20px 30px;
+
+        background-color: #121212 !important;
+    }
+
+    .footer-info,
+    .footer-nav,
+    .footer-sns {
+        width: 100%;
+    }
+
+    .footer-info {
+        text-align: left;
+    }
+
+    .footer-nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 14px;
+    }
+
+    .footer-nav a {
+        display: block;
+    }
+
+    .footer-sns {
+        text-align: right;
+    }
+
+    .footer-sns .instagram-account {
+        display: inline-block;
+        margin-top: 10px;
+    }
+
+    /* -------------------------
+       4. モバイル版のオレンジ線を消す
+       ------------------------- */
+    .footer-info,
+    .footer-nav,
+    .footer-sns {
+        border: none !important;
+    }
+
+    .footer-info::before,
+    .footer-info::after,
+    .footer-nav::before,
+    .footer-nav::after,
+    .footer-sns::before,
+    .footer-sns::after {
+        display: none !important;
+        content: none !important;
+    }
+
+    hr {
         display: none;
     }
+
+    /* -------------------------
+       Copyright
+       ------------------------- */
+    .copyright {
+        grid-column: 1 / -1;
+        text-align: center;
+        margin-top: 50px;
+        padding-top: 24px;
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
 
 }
